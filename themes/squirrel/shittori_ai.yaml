@@ -1,0 +1,19 @@
+# 用于 Squirrel Panel 的单套配色导入
+preset_color_schemes:
+  shittori_ai:
+    name: "Shittori · 蓝夜"
+    author: lazypoems
+    color_space: srgb
+    back_color: 0x28221E  # #1E2228
+    border_color: 0x4E423A  # #3A424E
+    candidate_text_color: 0xD1CAC6  # #C6CAD1
+    label_color: 0xA89B92  # #929BA8
+    comment_text_color: 0xA89B92  # #929BA8
+    text_color: 0xA89B92  # #929BA8
+    preedit_back_color: 0x28221E  # #1E2228
+    hilited_text_color: 0xDAB38F  # #8FB3DA
+    hilited_back_color: 0x56483B  # #3B4856
+    hilited_candidate_back_color: 0x56483B  # #3B4856
+    hilited_candidate_text_color: 0xEBE7E4  # #E4E7EB
+    hilited_candidate_label_color: 0xDAB38F  # #8FB3DA
+    hilited_comment_text_color: 0xA89B92  # #929BA8

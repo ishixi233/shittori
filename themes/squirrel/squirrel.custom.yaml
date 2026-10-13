@@ -1,0 +1,56 @@
+# Shittori · 松叶 / 蓝夜 — macOS 鼠须管外观补丁
+# 配色来源：本项目的 themes/typora/shittori.css 与 shittori/dark.css
+# 已有 squirrel.custom.yaml 时，将下列键合并进原有 patch，不要重复 patch 顶层。
+# 仅设置外观；保留输入方案、词库、候选数量与快捷键。
+patch:
+  style/alpha: 1
+  style/font_face: Avenir
+  style/comment_font_point: 12
+  style/label_font_point: 12
+  style/color_scheme_dark: shittori_ai
+  style/color_scheme: shittori_matsuba
+  style/translucency: false
+  style/candidate_list_layout: linear
+  style/hilited_corner_radius: 8
+  style/corner_radius: 12
+  style/font_point: 16
+  style/border_width: -2
+  style/border_height: -2
+  style/shadow_size: 0
+
+  # Shittori：配色取自个人 Typora 主题；0xBBGGRR，sRGB。
+  preset_color_schemes/shittori_matsuba:
+    name: "Shittori · 松叶"
+    author: lazypoems
+    color_space: srgb
+    back_color: 0xEFF6F9  # #F9F6EF
+    border_color: 0xC8D6DD  # #DDD6C8
+    candidate_text_color: 0x26292B  # #2B2926
+    label_color: 0x5C656A  # #6A655C
+    comment_text_color: 0x5C656A  # #6A655C
+    text_color: 0x5C656A  # #6A655C
+    preedit_back_color: 0xEFF6F9  # #F9F6EF
+    hilited_text_color: 0x2D6042  # #42602D
+    hilited_back_color: 0xCCDBD8  # #D8DBCC
+    hilited_candidate_back_color: 0xCCDBD8  # #D8DBCC
+    hilited_candidate_text_color: 0x191B1C  # #1C1B19
+    hilited_candidate_label_color: 0x2D6042  # #42602D
+    hilited_comment_text_color: 0x5C656A  # #6A655C
+
+  preset_color_schemes/shittori_ai:
+    name: "Shittori · 蓝夜"
+    author: lazypoems
+    color_space: srgb
+    back_color: 0x28221E  # #1E2228
+    border_color: 0x4E423A  # #3A424E
+    candidate_text_color: 0xD1CAC6  # #C6CAD1
+    label_color: 0xA89B92  # #929BA8
+    comment_text_color: 0xA89B92  # #929BA8
+    text_color: 0xA89B92  # #929BA8
+    preedit_back_color: 0x28221E  # #1E2228
+    hilited_text_color: 0xDAB38F  # #8FB3DA
+    hilited_back_color: 0x56483B  # #3B4856
+    hilited_candidate_back_color: 0x56483B  # #3B4856
+    hilited_candidate_text_color: 0xEBE7E4  # #E4E7EB
+    hilited_candidate_label_color: 0xDAB38F  # #8FB3DA
+    hilited_comment_text_color: 0xA89B92  # #929BA8

@@ -1,6 +1,6 @@
-# Shittori しっとり · 笔记主题
+# Shittori しっとり · 笔记与输入法主题
 
-为自己设计的一套笔记主题，同时用于 Typora 和 Obsidian。中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔。2026-10-11 至 10-12 与 Claude 一次对话完成。
+为自己设计的一套主题，用于 Typora、Obsidian 和 macOS 鼠须管（Squirrel）。笔记主题以中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔；输入法皮肤延续相同的暖纸白、松叶绿与深色蓝灰配色。笔记主题创建于 2026-10-11 至 10-12，鼠须管皮肤于 2026-10-13 加入。
 
 名字取自日语「しっとり」：润泽、沉静、不张扬。罗马字里双写的 t 是促音，不能省。
 
@@ -8,14 +8,15 @@
 
 1. **结构保持墨色，颜色只留给信号。** 标题、列表、代码这些每屏出现几十次的东西不上色；全篇一种强调色，高饱和色只给高亮。
 2. **一套字体贯穿，层级靠字号、字重和留白。** 不靠换字体、色块和装饰区分层级。
-3. **所有尺寸出自同一组数字。** 一个纵向单位、一组字号，不凭眼睛单独调某个值。
+3. **笔记尺寸出自同一组数字。** 一个纵向单位、一组字号；输入法则按候选窗的阅读距离与操作频率单独收紧。
 
 ## 怎么读这个项目
 
-- [设计流派梳理](<设计流派梳理.md>)：瑞士国际主义、乌尔姆、北欧、日式极简、民艺、苹果、Claude 各自的思想和手法，以及它们在这套主题里对应到哪里。
+- [设计流派梳理](<设计流派梳理.md>)：瑞士国际主义、乌尔姆、北欧、日式极简、民艺、苹果各自的思想和手法，以及它们在这套主题里对应到哪里。
 - [设计过程与决策](<设计过程与决策.md>)：每一步试了什么、留下什么、撤回什么和原因，以及尺寸体系、字体分工、配色的完整规格。
 - [样式测试](<样式测试.md>)：把主题处理过的元素各用一遍的测试文档，换主题或改变量后打开它检查。
-- 预览图在 [figures](<figures/>)，主题源码的备份在 [themes](<themes/>)。
+- [鼠须管皮肤](<themes/squirrel/README.md>)：松叶 / 蓝夜两套配色、安装方法、紧凑候选框与调整参数。
+- 预览图在 [figures](<figures/>)，各软件的主题文件在 [themes](<themes/>)。
 
 ## 预览
 
@@ -37,14 +38,15 @@ Obsidian 阅读模式（浅色、深色）与实时预览：
 
 ## 成品在哪里
 
-正在使用的文件在两个软件各自的目录里，本文件夹里的是 2026-10-12 的备份。
+正在使用的文件在各软件自己的目录里。本项目保留 Typora、Obsidian 的主题文件，以及 2026-10-13 新增的鼠须管皮肤。
 
-| 软件 | 正在使用的位置 | 本项目里的备份 |
+| 软件 | 正在使用的位置 | 本项目里的文件 |
 |---|---|---|
 | Typora | `~/Library/Application Support/abnerworks.Typora/themes/` 下的 `shittori.css`、`shittori-night.css`、`shittori/dark.css` | [themes/typora](<themes/typora/>) |
 | Obsidian | 库目录里 `.obsidian/themes/Shittori/` 下的 `theme.css`、`manifest.json` | [themes/obsidian](<themes/obsidian/>) |
+| 鼠须管（macOS） | `~/Library/Rime/squirrel.custom.yaml` | [themes/squirrel](<themes/squirrel/>) |
 
-两边改了正在使用的文件后，记得把备份也更新一次。
+修改正在使用的主题后，同步更新本项目对应的软件子目录。
 
 ### 安装或从备份恢复
 
@@ -62,9 +64,13 @@ mkdir -p <你的库>/.obsidian/themes/Shittori && cp themes/obsidian/* <你的�
 
 恢复后在 Typora 的「主题」菜单里选 Shittori（深色选 Shittori Night 或同样选 Shittori）；在 Obsidian 的「设置 → 外观 → 主题」里选 Shittori，并把字体大小设为 18。
 
+### 鼠须管
+
+[安装说明与完整配置](<themes/squirrel/README.md>)。默认横向候选、16 pt 字号、紧凑留白，外框 / 选中项圆角为 12 / 8；浅色「松叶」与深色「蓝夜」随 macOS 外观切换。已有配置时只合并外观补丁，再重新部署。
+
 ## 依赖的字体
 
-全部调用本机已安装的字体，主题里没有任何外部资源。换电脑时需要先装好：
+Typora 和 Obsidian 调用本机已安装的字体，主题里没有任何外部资源。鼠须管皮肤沿用默认 Avenir 与系统中文回退字体，无需安装额外字体。以下是笔记主题的字体：
 
 | 用途 | 字体 | 来源 |
 |---|---|---|
@@ -96,7 +102,7 @@ mkdir -p <你的库>/.obsidian/themes/Shittori && cp themes/obsidian/* <你的�
 - 提示块底色浓度：`--s-alert-tint`（浅色在 `shittori.css`，深色在 `shittori/dark.css`）
 - 表格线深浅：`--s-table-line`、`--s-table-head-line`
 
-配色两边都集中在 `--s-*` 变量里，改配色只改变量。
+Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirrel.custom.yaml` 的 `preset_color_schemes/shittori_matsuba` 与 `preset_color_schemes/shittori_ai` 中定义颜色，注释保留对应的 CSS RGB 值；具体参数见[鼠须管说明](<themes/squirrel/README.md>)。
 
 ## 已知问题与边界
 

@@ -1,0 +1,19 @@
+# 用于 Squirrel Panel 的单套配色导入
+preset_color_schemes:
+  shittori_matsuba:
+    name: "Shittori · 松叶"
+    author: lazypoems
+    color_space: srgb
+    back_color: 0xEFF6F9  # #F9F6EF
+    border_color: 0xC8D6DD  # #DDD6C8
+    candidate_text_color: 0x26292B  # #2B2926
+    label_color: 0x5C656A  # #6A655C
+    comment_text_color: 0x5C656A  # #6A655C
+    text_color: 0x5C656A  # #6A655C
+    preedit_back_color: 0xEFF6F9  # #F9F6EF
+    hilited_text_color: 0x2D6042  # #42602D
+    hilited_back_color: 0xCCDBD8  # #D8DBCC
+    hilited_candidate_back_color: 0xCCDBD8  # #D8DBCC
+    hilited_candidate_text_color: 0x191B1C  # #1C1B19
+    hilited_candidate_label_color: 0x2D6042  # #42602D
+    hilited_comment_text_color: 0x5C656A  # #6A655C
