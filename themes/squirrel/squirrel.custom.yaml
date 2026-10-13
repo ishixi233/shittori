@@ -3,8 +3,10 @@
 # 已有 squirrel.custom.yaml 时，将下列键合并进原有 patch，不要重复 patch 顶层。
 # 仅设置外观；保留输入方案、词库、候选数量与快捷键。
 patch:
+  style/label_font_face: "JetBrains Mono"
+  style/comment_font_face: "Helvetica"
   style/alpha: 1
-  style/font_face: Avenir
+  style/font_face: "Helvetica"
   style/comment_font_point: 12
   style/label_font_point: 12
   style/color_scheme_dark: shittori_ai

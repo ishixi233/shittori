@@ -4,7 +4,7 @@
 
 把 Shittori 的暖纸白与深色蓝灰带到 macOS 鼠须管（Squirrel）。浅色为「松叶」，深色为「蓝夜」，跟随系统外观切换。配色取自 [Typora 浅色主题](../typora/shittori.css)与[深色主题](../typora/shittori/dark.css)。
 
-横向候选，使用鼠须管默认 Avenir 和系统中文回退字体，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、8，实色背景、无阴影。
+横向候选，候选词和注释使用 Helvetica（中文由系统回退至苹方），编号使用 JetBrains Mono，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、8，实色背景、无阴影。
 
 ## 文件
 
@@ -17,6 +17,8 @@
 适用于 macOS 鼠须管，已在 1.1.2 中部署并检查生成配置。可搭配雾凇拼音或其他 Rime 输入方案；皮肤不设置词库、候选数量、快捷键或纠错功能。
 
 ## 安装
+
+编号需要本机已安装 JetBrains Mono；候选词和注释不需要额外字体。内嵌在编辑区的拼音由所在应用控制显示字体。
 
 1. 打开鼠须管用户目录 `~/Library/Rime/`。
 2. 若没有 `squirrel.custom.yaml`，把本目录同名文件复制进去。若已有该文件，将本皮肤 `patch:` 下的键合并到原有 `patch:` 中：同名外观键使用本皮肤值，其他设置保留；不要添加第二个顶层 `patch:`。
@@ -42,7 +44,9 @@ Squirrel Panel 2.0.5 的「用户自定义配色」有独立注册表，不会�
 
 | 配置键 | 默认值 | 用途 |
 | --- | --- | --- |
-| `style/font_face` | `Avenir` | 鼠须管默认字体；中文由系统回退字体显示 |
+| `style/font_face` | `Helvetica` | Helvetica；中文由系统回退至苹方 |
+| `style/comment_font_face` | `Helvetica` | 注释使用 Helvetica |
+| `style/label_font_face` | `JetBrains Mono` | 编号使用等宽字体 |
 | `style/font_point` | `16` | 候选词字号 |
 | `style/label_font_point` | `12` | 序号字号 |
 | `style/comment_font_point` | `12` | 注释字号 |

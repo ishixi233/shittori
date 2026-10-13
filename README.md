@@ -70,7 +70,7 @@ mkdir -p <你的库>/.obsidian/themes/Shittori && cp themes/obsidian/* <你的�
 
 ## 依赖的字体
 
-Typora 和 Obsidian 调用本机已安装的字体，主题里没有任何外部资源。鼠须管皮肤沿用默认 Avenir 与系统中文回退字体，无需安装额外字体。以下是笔记主题的字体：
+Typora 和 Obsidian 调用本机已安装的字体，主题里没有任何外部资源。鼠须管皮肤的候选词和注释使用 Helvetica，中文由系统回退至苹方，编号使用 JetBrains Mono。以下是笔记主题的字体：
 
 | 用途 | 字体 | 来源 |
 |---|---|---|
