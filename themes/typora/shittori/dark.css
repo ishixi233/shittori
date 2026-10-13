@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/*
+ * Shittori 的深色配色（藍色调），shittori.css 与 shittori-night.css 共用这一份。
+ * shittori.css 在系统深色外观下引入；shittori-night.css 在屏幕上始终引入。
+ * 选择器写成 html:root，优先级高于 shittori.css 里的 :root 浅色值。
+ * 色名参考 nipponcolors.com，各值为适配深色背景调整过的近似色。
+ */
+html:root {
+  --s-scheme: dark;
+  --s-smoothing: antialiased;
+  --s-body-weight: 400;
+  --s-paper: #1e2228;
+  --s-paper-side: #191c21;
+  --s-surface: #252a32;
+  --s-raised: #2d333d;
+  --s-rule: #3a424e;
+  --s-ink: #c6cad1;
+  --s-ink-strong: #e4e7eb;
+  --s-ink-soft: #929ba8;
+  --s-ink-faint: #677283;
+  --s-accent: #8fb3da; /* 藍的浅染 */
+  --s-accent-line: rgba(143, 179, 218, 0.45);
+  --s-select: rgba(143, 179, 218, 0.26);
+  --s-table-line: rgba(198, 202, 209, 0.07);
+  --s-table-head-line: rgba(198, 202, 209, 0.22);
+  --s-mark: #7a6a22;
+  --s-strong: var(--s-ink-strong);
+
+  --s-syn-keyword: #8fb3da;
+  --s-syn-string: #c9a482;
+  --s-syn-number: #cdb878;
+  --s-syn-def: #98c4bd; /* 青磁 */
+  --s-syn-comment: #677283;
+
+  --s-note: #8fb3da;
+  --s-tip: #9bbf8c;
+  --s-important: #b7a0cc;
+  --s-warning: #cdb878;
+  --s-caution: #d49482;
+  --s-alert-tint: 7%;
+
+  --mermaid-theme: dark;
+  
+}

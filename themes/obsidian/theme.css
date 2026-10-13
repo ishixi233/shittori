@@ -1,0 +1,969 @@
+@charset "UTF-8";
+
+/*
+ * Shittori しっとり — Obsidian 版。与 Typora 的 shittori.css 同一套设计：
+ * 暖白纸色、暖黑墨色，全篇只用一种强调色；层级靠字号、字重与留白。
+ * 浅色：松葉 MATSUBA 绿。深色：低饱和的藍。跟随 Obsidian 的明暗设置。
+ * 字体均调用本机已安装版本，无任何外部资源。
+ *
+ * 与 Typora 版的对应方式：
+ *   · Obsidian 的明暗由 body 上的 .theme-light / .theme-dark 决定，所以深浅
+ *     两套配色写在同一个文件里，没有单独的 Night 版。
+ *   · 正文字号由「外观 → 字体大小」决定，主题无法覆盖。因此这里所有尺寸都
+ *     按正文字号的比例推算：设为 18 时与 Typora 版逐像素一致，其他字号等比缩放。
+ *   · 每种样式写两遍：阅读模式（.markdown-rendered）与实时预览（.cm-line 等）。
+ *   · 能用 Obsidian 变量表达的都用变量，其余才写规则。
+ */
+
+/* @settings
+
+name: Shittori
+id: shittori
+settings:
+  -
+    id: shittori-strong-accent
+    title: 加粗带强调色
+    description: 关闭时加粗只加重、保持墨色；开启后加粗使用强调色
+    type: class-toggle
+  -
+    id: shittori-h1-text-font
+    title: 一级标题用正文字体
+    description: 关闭时一级标题用方正大标宋 + EB Garamond；开启后用思源宋体
+    type: class-toggle
+  -
+    id: shittori-justify
+    title: 正文两端对齐
+    description: 默认左对齐；开启后正文段落两端对齐（遇到行内代码时字距可能被拉开）
+    type: class-toggle
+
+*/
+
+/* 中文弯引号、破折号、省略号交给中文字体，避免被西文字体排成半宽。
+ * 单引号 U+2019 留给西文，保证英文撇号（don’t）宽度正常。 */
+@font-face {
+  font-family: "Shittori Punct";
+  src: local("SourceHanSerifSCVF-Regular"), local("Source Han Serif SC VF"),
+    local("STSongti-SC-Regular");
+  font-weight: 200 900;
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct Title";
+  src: local("FZDBSJW--GB1-0"), local("SourceHanSerifSCVF-Bold");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct Kai";
+  src: local("STKaitiSC-Regular"), local("FZKTK--GBK1-0");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct WenKai";
+  src: local("LXGWWenKai-Regular"), local("STKaitiSC-Regular");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+/* ============================================================
+   变量：字体、尺寸、浅色配色
+   ============================================================ */
+
+body {
+  /* == 字体 == */
+  --s-serif: "Shittori Punct", "Source Serif 4", "Source Han Serif SC VF",
+    "Source Han Serif SC", "Songti SC", "Hiragino Mincho ProN", serif;
+  /* 一级标题：方正大标宋 + EB Garamond 粗体；假名与生僻字回落到思源宋体。 */
+  --s-h1: "Shittori Punct Title", "EB Garamond", "FZDaBiaoSong-B06S",
+    "Source Han Serif SC VF", "Songti SC", serif;
+  /* 引用：楷体-简。强调：霞鹜文楷，靠强调色与正文拉开。 */
+  --s-kai: "Shittori Punct Kai", "Source Serif 4", "Kaiti SC", "FZKai-Z03",
+    "LXGW WenKai", serif;
+  --s-em: "Shittori Punct WenKai", "Source Serif 4", "LXGW WenKai", "Kaiti SC",
+    serif;
+  --s-mono: "JetBrains Mono", "SF Mono", Menlo, "PingFang SC", monospace;
+  --s-ui: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans",
+    sans-serif;
+
+  /* 作为主题默认值，用户在「外观」里另选字体时仍然生效。 */
+  --font-text-theme: var(--s-serif);
+  --font-interface-theme: var(--s-ui);
+  --font-monospace-theme: var(--s-mono);
+
+  /* == 尺寸：全部出自这一组 ==
+   * 纵向单位 u = 正文字号 × 4/9（正文 18px 时 u = 8px，行高 4u = 32px，9:16）。
+   *   纵向间距只取 u 的 1、2、3、4、6、8、12 倍：
+   *   1 列表项之间 · 2 段落之间（半行）· 3 引用、代码、表格、提示块的上下
+   *   4 一行 · 6 小节（H3）之前 · 8 章（H2）之前 · 12 文末留白
+   * 横向单位是字宽：版心 40 字，列表缩进 2 字，引用与单元格内缩 1 字，
+   *   行内留空取四分之一字（0.25em）或八分之一字（0.125em）。
+   * 字号八级，按正文 18 计为 12 14 16 18 20 24 32 40：
+   *   40 H1 与笔记标题 · 24 H2 · 20 H3 · 18 正文与 H4 · 16 表格、脚注、行内代码与 H5
+   *   14 代码块、标签与 H6 · 12 上下标（32 备用）
+   * 字重三级：400 正文 · 600 标题 · 700 加粗（H4、H5 与正文同级字号，用 700 区分）。
+   * 圆角两级：2px 行内 · 4px 块。线宽两级：1px 细线 · 2px 引用与提示块的侧线。 */
+  --s-u: calc(var(--font-text-size) * 4 / 9);
+  --s-1: var(--s-u);
+  --s-2: calc(var(--s-u) * 2);
+  --s-3: calc(var(--s-u) * 3);
+  --s-4: calc(var(--s-u) * 4);
+  --s-6: calc(var(--s-u) * 6);
+  --s-7: calc(var(--s-u) * 7);
+  --s-8: calc(var(--s-u) * 8);
+  --s-12: calc(var(--s-u) * 12);
+  --s-f12: calc(var(--font-text-size) * 12 / 18);
+  --s-f14: calc(var(--font-text-size) * 14 / 18);
+  --s-f16: calc(var(--font-text-size) * 16 / 18);
+  --s-zi: var(--font-text-size); /* 一个字宽 */
+
+  /* == 浅色：纸、墨、松葉（也是导出 PDF 时使用的配色） == */
+  --s-smoothing: auto;
+  --s-paper: #f9f6ef;
+  --s-paper-side: #f2eee5;
+  --s-surface: #f2eee4; /* 代码块、行内代码 */
+  --s-raised: #ebe6da; /* 悬停、选中项 */
+  --s-rule: #ddd6c8; /* 细线 */
+  --s-ink: #2b2926;
+  --s-ink-strong: #1c1b19;
+  --s-ink-soft: #6a655c; /* 引用、次要文字 */
+  --s-ink-faint: #a19a8d; /* 标记符号、注释 */
+  --s-accent: #42602d; /* 松葉 MATSUBA */
+  --accent-h: 95; /* 同一颜色的 HSL 写法，供 Obsidian 推算派生色 */
+  --accent-s: 36%;
+  --accent-l: 28%;
+  --s-accent-hover: #2f4720;
+  --s-accent-line: rgba(66, 96, 45, 0.38);
+  --s-accent-wash: rgba(66, 96, 45, 0.08);
+  --s-select: rgba(66, 96, 45, 0.18);
+  --s-table-line: rgba(43, 41, 38, 0.07); /* 表格行线 */
+  --s-table-head-line: rgba(43, 41, 38, 0.22); /* 表头线与末行线 */
+  --s-mark: #f5dc7d; /* 刈安 KARIYASU：全篇唯一的高饱和色，只给 ==高亮== */
+  --s-strong: var(--s-ink-strong); /* 加粗只加重 */
+  --s-shadow: rgba(43, 41, 38, 0.16);
+
+  /* 语法高亮：五种低饱和色，其余沿用墨色 */
+  --s-syn-keyword: #42602d; /* 松葉 */
+  --s-syn-string: #8a4b2d; /* 柿渋 */
+  --s-syn-number: #7d5f16; /* 黄土 */
+  --s-syn-def: #1f5a73; /* 藍 */
+  --s-syn-comment: #a19a8d;
+
+  /* 提示块的五个色系 */
+  --s-note: #2f6480;
+  --s-tip: #42602d;
+  --s-important: #6a4a7c;
+  --s-warning: #8a6414;
+  --s-caution: #9a3f2d;
+  --s-alert-tint: 5%; /* 提示块底色的浓度 */
+}
+
+/* == 深色：藍。只作用于屏幕，导出 PDF 时回到上面的浅色 == */
+@media screen {
+  .theme-dark {
+    --s-smoothing: antialiased;
+    --s-paper: #1e2228;
+    --s-paper-side: #191c21;
+    --s-surface: #252a32;
+    --s-raised: #2d333d;
+    --s-rule: #3a424e;
+    --s-ink: #c6cad1;
+    --s-ink-strong: #e4e7eb;
+    --s-ink-soft: #929ba8;
+    --s-ink-faint: #677283;
+    --s-accent: #8fb3da; /* 藍的浅染 */
+    --accent-h: 211;
+    --accent-s: 50%;
+    --accent-l: 71%;
+    --s-accent-hover: #b4cde8;
+    --s-accent-line: rgba(143, 179, 218, 0.45);
+    --s-accent-wash: rgba(143, 179, 218, 0.1);
+    --s-select: rgba(143, 179, 218, 0.26);
+    --s-table-line: rgba(198, 202, 209, 0.07);
+    --s-table-head-line: rgba(198, 202, 209, 0.22);
+    --s-mark: #7a6a22;
+    --s-shadow: rgba(0, 0, 0, 0.4);
+
+    --s-syn-keyword: #8fb3da;
+    --s-syn-string: #c9a482;
+    --s-syn-number: #cdb878;
+    --s-syn-def: #98c4bd; /* 青磁 */
+    --s-syn-comment: #677283;
+
+    --s-note: #8fb3da;
+    --s-tip: #9bbf8c;
+    --s-important: #b7a0cc;
+    --s-warning: #cdb878;
+    --s-caution: #d49482;
+    --s-alert-tint: 7%;
+  }
+}
+
+/* 导出 PDF：白底。 */
+@media print {
+  body {
+    --s-paper: #ffffff;
+  }
+}
+
+/* Style Settings 开关 */
+body.shittori-strong-accent {
+  --s-strong: var(--s-accent);
+}
+
+body.shittori-h1-text-font {
+  --s-h1: var(--s-serif);
+}
+
+/* ============================================================
+   把 --s-* 接到 Obsidian 的变量上
+   ============================================================
+ * 选择器必须是 .theme-light / .theme-dark 而不是 body：Obsidian 自己在这两个
+ * 类上定义了强调色、选区、八个基色等变量，写在 body 上会被它盖掉
+ * （表现为深色下拖动边栏、日历等处仍是默认的紫色）。 */
+
+.theme-light,
+.theme-dark {
+  /* 版面 */
+  --line-height-normal: calc(16 / 9); /* 32 / 18 */
+  --line-height-tight: calc(12 / 9); /* 24 / 18 */
+  --file-line-width: calc(var(--s-zi) * 40);
+  --file-margins: var(--s-6) calc(var(--s-zi) * 2);
+  --p-spacing: var(--s-2);
+  --heading-spacing: var(--s-6);
+  --bold-modifier: 300; /* 400 + 300 = 700 */
+  --bold-color: var(--s-strong);
+  --italic-color: var(--s-accent);
+
+  /* 圆角：2px 与 4px 两级 */
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --radius-l: 4px;
+  --radius-xl: 4px;
+  --input-radius: 4px;
+  --button-radius: 4px;
+  --checkbox-radius: 2px;
+  --code-radius: 2px;
+  --callout-radius: 0 4px 4px 0;
+  --tag-radius: 2px;
+
+  /* 界面文字取同一组字号里的 12、14、16、20 */
+  --font-ui-smaller: 12px;
+  --font-ui-small: 14px;
+  --font-ui-medium: 16px;
+  --font-ui-large: 20px;
+
+  /* 背景与线 */
+  --background-primary: var(--s-paper);
+  --background-primary-alt: var(--s-surface);
+  --background-secondary: var(--s-paper-side);
+  --background-secondary-alt: var(--s-paper-side);
+  --background-modifier-hover: var(--s-raised);
+  --background-modifier-active-hover: var(--s-raised);
+  --background-modifier-border: var(--s-rule);
+  --background-modifier-border-hover: var(--s-ink-faint);
+  --background-modifier-border-focus: var(--s-accent);
+  --background-modifier-form-field: var(--s-paper);
+  --background-modifier-box-shadow: var(--s-shadow);
+  --divider-color: var(--s-rule);
+  --titlebar-background: var(--s-paper-side);
+  --titlebar-background-focused: var(--s-paper-side);
+  --ribbon-background: var(--s-paper-side);
+  --ribbon-background-collapsed: var(--s-paper-side);
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--s-rule);
+  --scrollbar-active-thumb-bg: var(--s-ink-faint);
+
+  /* 文字与交互 */
+  --text-normal: var(--s-ink);
+  --text-muted: var(--s-ink-soft);
+  --text-faint: var(--s-ink-faint);
+  --text-accent: var(--s-accent);
+  --text-accent-hover: var(--s-accent-hover);
+  --text-on-accent: var(--s-paper);
+  --text-selection: var(--s-select);
+  --text-highlight-bg: var(--s-mark);
+  --caret-color: var(--s-accent);
+  --interactive-normal: var(--s-paper);
+  --interactive-hover: var(--s-raised);
+  --interactive-accent: var(--s-accent);
+  --interactive-accent-hover: var(--s-accent-hover);
+  /* Obsidian 的强调色体系：许多界面元素和插件直接取这几个值。 */
+  --color-accent: var(--s-accent);
+  --color-accent-1: var(--s-accent);
+  --color-accent-2: var(--s-accent-hover);
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --divider-color-hover: var(--s-accent);
+  --icon-color: var(--s-ink-faint);
+  --icon-color-hover: var(--s-ink);
+  --icon-color-active: var(--s-accent);
+  --icon-color-focused: var(--s-ink-soft);
+  --nav-item-color: var(--s-ink-soft);
+  --nav-item-color-hover: var(--s-ink-strong);
+  --nav-item-color-active: var(--s-ink-strong);
+  --nav-item-background-hover: var(--s-raised);
+  --nav-item-background-active: var(--s-raised);
+  --nav-item-weight-active: 600;
+
+  /* Obsidian 的八个基色，供提示块、画布、图谱等取用 */
+  --color-red: var(--s-caution);
+  --color-orange: var(--s-syn-string);
+  --color-yellow: var(--s-warning);
+  --color-green: var(--s-tip);
+  --color-cyan: var(--s-syn-def);
+  --color-blue: var(--s-note);
+  --color-purple: var(--s-important);
+  --color-pink: var(--s-important);
+
+  /* 标题：字号以正文为 1em */
+  --heading-formatting: var(--s-ink-faint);
+  --h1-font: var(--s-h1);
+  --h2-font: var(--font-text);
+  --h3-font: var(--font-text);
+  --h4-font: var(--font-text);
+  --h5-font: var(--font-text);
+  --h6-font: var(--font-text);
+  --h1-size: calc(40em / 18);
+  --h2-size: calc(24em / 18);
+  --h3-size: calc(20em / 18);
+  --h4-size: 1em;
+  --h5-size: calc(16em / 18);
+  --h6-size: calc(14em / 18);
+  --h1-weight: 700;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --h4-weight: 700;
+  --h5-weight: 700;
+  --h6-weight: 600;
+  /* 行高换算成各自字号的倍数：H1 为 7u，其余为 4u */
+  --h1-line-height: calc(56 / 40);
+  --h2-line-height: calc(32 / 24);
+  --h3-line-height: calc(32 / 20);
+  --h4-line-height: calc(32 / 18);
+  --h5-line-height: calc(32 / 16);
+  --h6-line-height: calc(32 / 14);
+  --h1-letter-spacing: 0;
+  --h2-letter-spacing: 0;
+  --h3-letter-spacing: 0;
+  --h4-letter-spacing: 0;
+  --h5-letter-spacing: 0;
+  --h6-letter-spacing: 0.05em;
+  --h1-color: var(--s-ink-strong);
+  --h2-color: var(--s-ink-strong);
+  --h3-color: var(--s-ink-strong);
+  --h4-color: var(--s-ink-strong);
+  --h5-color: var(--s-ink-soft);
+  --h6-color: var(--s-ink-faint);
+  --inline-title-margin-bottom: var(--s-4);
+
+  /* 链接与标签 */
+  --link-color: var(--s-accent);
+  --link-color-hover: var(--s-accent-hover);
+  --link-decoration: underline;
+  --link-decoration-hover: underline;
+  --link-decoration-thickness: 1px;
+  --link-external-color: var(--s-accent);
+  --link-external-color-hover: var(--s-accent-hover);
+  --link-external-decoration: underline;
+  --link-external-decoration-hover: underline;
+  --link-unresolved-color: var(--s-ink-soft);
+  --link-unresolved-opacity: 1;
+  --link-unresolved-decoration-style: dotted;
+  --link-unresolved-decoration-color: var(--s-ink-faint);
+  --tag-color: var(--s-accent);
+  --tag-color-hover: var(--s-accent-hover);
+  --tag-background: var(--s-accent-wash);
+  --tag-background-hover: var(--s-select);
+  --tag-border-width: 0;
+  --tag-size: calc(14em / 18);
+  --tag-padding-x: 0.5em;
+  --tag-padding-y: 0.1em;
+
+  /* 引用 */
+  --blockquote-border-thickness: 2px;
+  --blockquote-border-color: var(--s-rule);
+  --blockquote-color: var(--s-ink-soft);
+  --blockquote-background-color: transparent;
+  --blockquote-font-style: normal;
+
+  /* 列表与任务 */
+  --list-indent: 2em;
+  --list-spacing: calc(var(--s-u) / 2); /* 上下各半个单位，项与项之间合计 1u */
+  --list-marker-color: var(--s-ink-faint);
+  --list-marker-color-hover: var(--s-ink-soft);
+  --list-marker-color-collapsed: var(--s-accent);
+  --checkbox-color: var(--s-accent);
+  --checkbox-color-hover: var(--s-accent-hover);
+  --checkbox-border-color: var(--s-ink-faint);
+  --checkbox-border-color-hover: var(--s-ink-soft);
+  --checkbox-marker-color: var(--s-paper);
+  --checklist-done-decoration: none;
+  --checklist-done-color: var(--s-ink-faint);
+
+  /* 代码 */
+  --code-size: calc(16em / 18);
+  --code-background: var(--s-surface);
+  --code-border-width: 0;
+  --code-normal: var(--s-ink);
+  --code-comment: var(--s-syn-comment);
+  --code-keyword: var(--s-syn-keyword);
+  --code-tag: var(--s-syn-keyword);
+  --code-string: var(--s-syn-string);
+  --code-value: var(--s-syn-number);
+  --code-important: var(--s-syn-number);
+  --code-function: var(--s-syn-def);
+  --code-property: var(--s-ink);
+  --code-operator: var(--s-ink);
+  --code-punctuation: var(--s-ink);
+
+  /* 表格：只留横线 */
+  --table-background: transparent;
+  --table-border-width: 0;
+  --table-border-color: transparent;
+  --table-header-background: transparent;
+  --table-header-background-hover: transparent;
+  --table-header-color: var(--s-ink-strong);
+  --table-header-weight: 600;
+  --table-header-size: calc(16em / 18);
+  --table-text-size: calc(16em / 18);
+  --table-line-height: calc(24 / 16); /* 3u */
+  --table-row-background-hover: var(--s-surface);
+  --table-row-alt-background: transparent;
+  --table-row-alt-background-hover: var(--s-surface);
+  --table-column-alt-background: transparent;
+
+  /* 提示块：把 Obsidian 的十几种类型归到五个色系 */
+  --callout-border-width: 0;
+  --callout-padding: var(--s-1) 1em;
+  --callout-title-padding: 0;
+  --callout-content-padding: 0;
+  --callout-title-size: var(--s-f14);
+  --callout-title-weight: 600;
+  --callout-blend-mode: normal;
+  --callout-default: var(--s-note);
+  --callout-info: var(--s-note);
+  --callout-todo: var(--s-note);
+  --callout-summary: var(--s-note);
+  --callout-tip: var(--s-tip);
+  --callout-success: var(--s-tip);
+  --callout-important: var(--s-important);
+  --callout-example: var(--s-important);
+  --callout-warning: var(--s-warning);
+  --callout-question: var(--s-warning);
+  --callout-error: var(--s-caution);
+  --callout-fail: var(--s-caution);
+  --callout-bug: var(--s-caution);
+  --callout-quote: var(--s-ink-soft);
+
+  /* 分割线、嵌入、属性、脚注 */
+  --hr-color: var(--s-ink-faint);
+  --hr-thickness: 1px;
+  --embed-border-start: 2px solid var(--s-rule);
+  --embed-padding: 0 0 0 1em;
+  --metadata-label-font: var(--s-ui);
+  --metadata-input-font: var(--s-ui);
+  --metadata-label-font-size: var(--s-f14);
+  --metadata-input-font-size: var(--s-f14);
+  --metadata-label-text-color: var(--s-ink-faint);
+  --metadata-input-text-color: var(--s-ink-soft);
+  --metadata-divider-color: transparent;
+  --metadata-property-background-hover: var(--s-surface);
+  --footnote-size: calc(16em / 18);
+
+  -webkit-font-smoothing: var(--s-smoothing);
+}
+
+/* 开启「半透明窗口」时，Obsidian 会把侧栏与标签栏变透明、整体以 60% 不透明度
+ * 叠在桌面上。用侧栏底色垫住容器，各面板保持不透明，分隔线也恢复为主题的细线。 */
+body.is-translucent:not(.is-fullscreen) {
+  --workspace-background-translucent: var(--background-secondary);
+  --divider-color: var(--s-rule);
+}
+
+/* ============================================================
+   文稿：阅读模式与实时预览共用的基础
+   ============================================================ */
+
+.markdown-rendered,
+.markdown-source-view.mod-cm6 .cm-content {
+  font-kerning: normal;
+  font-synthesis: none; /* 不合成假粗体、假斜体 */
+  text-autospace: normal; /* 中西文之间自动留出间隙 */
+  overflow-wrap: break-word;
+}
+
+/* 文末留白 12u。 */
+.markdown-preview-sizer,
+.markdown-source-view.mod-cm6 .cm-sizer {
+  padding-bottom: var(--s-12);
+}
+
+/* 少量日文：标注 lang="ja" 的片段改用明朝体字形。 */
+.markdown-rendered :lang(ja) {
+  font-family: "Source Serif 4", "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+/* 段落默认左对齐。在 Style Settings 里打开「正文两端对齐」后才两端对齐；
+ * 即便打开，列表、引用、提示块、表格里行短且中西混排多，仍保持左对齐。 */
+body.shittori-justify .markdown-rendered p {
+  text-align: justify;
+}
+
+body.shittori-justify .markdown-rendered :is(li, blockquote, td, th, .callout) p {
+  text-align: start;
+}
+
+body.shittori-justify
+  .markdown-source-view.mod-cm6.is-live-preview
+  .cm-line:not(.HyperMD-header):not(.HyperMD-list-line):not(.HyperMD-quote):not(.HyperMD-codeblock):not(.HyperMD-table-row):not(.HyperMD-footnote) {
+  text-align: justify;
+}
+
+/* ---------- 标题 ---------- */
+
+/* 阅读模式：标题前的间距通过 --heading-spacing 给出（Obsidian 只在标题跟在
+ * 段落、列表、代码、表格、引用之后时使用它；标题紧跟标题时是 --p-spacing = 2u）。 */
+.markdown-rendered h2 {
+  --heading-spacing: var(--s-8);
+}
+
+.markdown-rendered h3 {
+  --heading-spacing: var(--s-6);
+}
+
+.markdown-rendered :is(h4, h5, h6) {
+  --heading-spacing: var(--s-4);
+}
+
+/* 一级标题与笔记标题是全篇唯一居中的元素；字体是宋体的标题款（见 --s-h1）。 */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1,
+.inline-title {
+  text-align: center;
+}
+
+.markdown-rendered h1 {
+  margin-block-end: var(--s-4);
+}
+
+.markdown-rendered h2,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 {
+  padding-bottom: calc(var(--s-1) - 1px);
+  border-bottom: 1px solid var(--s-rule);
+}
+
+/* 实时预览里每个标题是一行，前面通常还有一个空行（4u）。
+ * 这里补足的上内边距使「空行 + 内边距」与阅读模式的间距相等。 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
+  padding-top: var(--s-2);
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 {
+  padding-top: var(--s-4);
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 {
+  padding-top: var(--s-2);
+}
+
+.markdown-source-view.mod-cm6
+  .cm-line:is(.HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6) {
+  padding-top: 0;
+}
+
+/* 标题里的加粗、强调不再叠加字重与颜色。 */
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) :is(strong, em),
+.markdown-source-view.mod-cm6 .HyperMD-header :is(.cm-strong, .cm-em) {
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* 编辑时显露的 Markdown 标记符号。 */
+.cm-s-obsidian .cm-formatting:not(.cm-formatting-code-block) {
+  color: var(--s-ink-faint);
+}
+
+/* ---------- 行内：加粗、强调、高亮、上下标 ---------- */
+
+/* 强调：中文霞鹜文楷，英文真斜体，带强调色。 */
+.markdown-rendered em,
+.cm-s-obsidian .cm-em:not(.cm-formatting) {
+  font-family: var(--s-em);
+  font-style: italic;
+  color: var(--s-accent);
+}
+
+/* 强调 + 加粗（***文字***）：仍是强调的字体与颜色，只是加重。 */
+.markdown-rendered :is(em strong, strong em),
+.cm-s-obsidian .cm-strong.cm-em:not(.cm-formatting) {
+  font-family: var(--s-em);
+  font-weight: 700;
+  color: var(--s-accent);
+}
+
+.markdown-rendered a :is(em, strong) {
+  color: inherit;
+}
+
+/* 高亮：整行高的荧光笔。强调的三级阶梯是
+ * 楷体（语气）→ 加粗（重点）→ 高亮（必须回看）。 */
+.markdown-rendered mark,
+.cm-s-obsidian span.cm-highlight:not(.cm-formatting) {
+  color: var(--s-ink-strong);
+  background-color: var(--s-mark);
+  padding: 0.1em 0.125em;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.markdown-rendered del,
+.cm-s-obsidian .cm-strikethrough {
+  color: var(--s-ink-faint);
+}
+
+/* 上下标与所在文字同色，不撑高所在行。 */
+.markdown-rendered :is(sup, sub) {
+  font-size: calc(12em / 18);
+  line-height: 0;
+  color: inherit;
+}
+
+kbd {
+  font-family: var(--s-mono);
+  font-size: calc(14em / 18);
+  line-height: 1;
+  color: var(--s-ink-soft);
+  background: var(--s-paper);
+  border: 1px solid var(--s-rule);
+  border-radius: 2px;
+  box-shadow: none;
+  padding: 0.1em 0.25em;
+}
+
+/* ---------- 链接与标签 ---------- */
+
+.markdown-rendered :is(.internal-link, .external-link),
+.cm-s-obsidian :is(.cm-hmd-internal-link, .cm-link, .cm-url) {
+  text-decoration-color: var(--s-accent-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.markdown-rendered :is(.internal-link, .external-link):hover {
+  text-decoration-color: currentColor;
+}
+
+.markdown-rendered .tag,
+.cm-s-obsidian .cm-hashtag {
+  font-family: var(--s-ui);
+}
+
+/* ---------- 列表 ---------- */
+
+.markdown-rendered ol > li::marker {
+  font-variant-numeric: tabular-nums;
+  color: var(--s-ink-soft);
+}
+
+.markdown-rendered :is(ul, ol) :is(ul, ol) {
+  margin-block: 0;
+}
+
+/* ---------- 引用：细线、楷体、无底色 ---------- */
+
+.markdown-rendered blockquote {
+  margin-block: var(--s-3);
+  padding-inline-start: 1em;
+  font-family: var(--s-kai);
+}
+
+.markdown-rendered blockquote p {
+  margin-block: var(--s-1);
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-quote {
+  font-family: var(--s-kai);
+  color: var(--s-ink-soft);
+}
+
+/* 引用里的强调改回正文家族的真斜体，避免楷体里再套楷体。 */
+.markdown-rendered blockquote em,
+.markdown-source-view.mod-cm6 .HyperMD-quote .cm-em:not(.cm-formatting) {
+  font-family: var(--s-serif);
+}
+
+/* ---------- 提示块：色线、小标签、极淡的同色底 ---------- */
+
+.callout {
+  margin-block: var(--s-3);
+  border-inline-start: 2px solid var(--callout-color);
+  background-color: color-mix(
+    in srgb,
+    var(--callout-color) var(--s-alert-tint),
+    transparent
+  );
+  font-family: var(--s-serif);
+  color: var(--s-ink);
+}
+
+.callout-title {
+  gap: 0.5em;
+  align-items: center;
+  font-family: var(--s-ui);
+  line-height: var(--s-3);
+  letter-spacing: 0.05em;
+  color: var(--callout-color);
+}
+
+.callout-title-inner {
+  color: var(--callout-color);
+}
+
+.callout-icon .svg-icon {
+  width: var(--s-f14);
+  height: var(--s-f14);
+}
+
+.callout-content p {
+  margin-block: var(--s-1);
+  text-align: start;
+}
+
+.callout-content > :last-child {
+  margin-block-end: 0;
+}
+
+/* ---------- 代码 ---------- */
+
+.markdown-rendered code,
+.cm-s-obsidian span.cm-inline-code {
+  font-variant-ligatures: none;
+}
+
+.markdown-rendered :not(pre) > code,
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting) {
+  line-height: 1; /* 等宽字体的度量不同，不让它撑高所在行 */
+  padding: 0.1em 0.25em;
+  margin: 0 0.125em;
+  border-radius: 2px;
+}
+
+/* 代码块 14 号字、行高 3u；边线用内阴影画，不占高度。 */
+.markdown-rendered pre {
+  margin-block: var(--s-3);
+  padding: var(--s-2);
+  font-size: var(--s-f14);
+  line-height: var(--s-3);
+  border: 0;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--s-rule);
+}
+
+.markdown-rendered pre code {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock {
+  font-size: var(--s-f14);
+  line-height: var(--s-3);
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-begin {
+  padding-top: var(--s-1);
+  border-radius: 4px 4px 0 0;
+}
+
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-end {
+  padding-bottom: var(--s-1);
+  border-radius: 0 0 4px 4px;
+}
+
+.markdown-rendered pre button.copy-code-button,
+.markdown-source-view.mod-cm6 .code-block-flair {
+  font-family: var(--s-ui);
+  font-size: var(--font-ui-smaller);
+  color: var(--s-ink-faint);
+}
+
+/* ---------- 公式 ---------- */
+
+mjx-container {
+  color: inherit;
+}
+
+.markdown-rendered mjx-container[display="true"] {
+  margin-block: var(--s-3);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-source-view.mod-cm6 .math-block > mjx-container {
+  padding: var(--s-3) 0;
+}
+
+/* ---------- 表格：只留横线，逐行细线引导视线，数字等宽对齐 ---------- */
+
+.markdown-rendered table {
+  width: 100%;
+  margin-block: var(--s-3);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.markdown-rendered :is(th, td) {
+  padding: var(--s-1) 1em;
+  border: 0;
+  box-shadow: inset 0 -1px 0 var(--s-table-line);
+}
+
+.markdown-rendered th,
+.markdown-rendered tbody tr:last-child td {
+  box-shadow: inset 0 -1px 0 var(--s-table-head-line);
+}
+
+.markdown-rendered th {
+  line-height: var(--table-line-height);
+}
+
+.markdown-rendered tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* ---------- 分割线、图片、嵌入 ---------- */
+
+.markdown-rendered hr {
+  width: calc(var(--s-zi) * 10); /* 版心的四分之一 */
+  margin: var(--s-6) auto calc(var(--s-6) - 1px);
+}
+
+.markdown-source-view.mod-cm6 .hr hr {
+  flex: 0 0 calc(var(--s-zi) * 10);
+  margin-inline: auto;
+}
+
+.markdown-rendered img:not(.emoji) {
+  border-radius: 2px;
+}
+
+/* 独占一段的图片居中。 */
+.markdown-rendered p > :is(.image-embed, img):only-child {
+  display: block;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.markdown-rendered .markdown-embed,
+.markdown-rendered .file-embed {
+  border-radius: 0;
+}
+
+/* ---------- 脚注与属性 ---------- */
+
+.markdown-rendered .footnotes {
+  margin-top: var(--s-6);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--s-rule);
+  line-height: var(--s-3);
+  color: var(--s-ink-soft);
+}
+
+.markdown-rendered .footnotes hr {
+  display: none;
+}
+
+/* 脚注标号与所在文字同色，只靠位置与字号区分。 */
+.markdown-rendered .footnote-ref,
+.markdown-rendered .footnote-link,
+.cm-s-obsidian .cm-footref {
+  font-family: var(--s-ui);
+  color: inherit;
+  text-decoration: none;
+}
+
+.metadata-container {
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--s-rule);
+}
+
+.cm-s-obsidian .cm-hmd-frontmatter,
+.cm-s-obsidian .cm-comment {
+  font-family: var(--s-mono);
+  color: var(--s-ink-faint);
+}
+
+/* ============================================================
+   界面：系统无衬线，层次靠深浅，不用强调色铺底
+   ============================================================ */
+
+.workspace-ribbon,
+.workspace-tab-header-container,
+.view-header,
+.status-bar {
+  font-variant-numeric: tabular-nums;
+}
+
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--s-ink-strong);
+  font-weight: 600;
+}
+
+.view-header-title {
+  color: var(--s-ink-soft);
+}
+
+.nav-folder-title {
+  font-weight: 600;
+}
+
+.status-bar {
+  color: var(--s-ink-faint);
+}
+
+.modal,
+.prompt,
+.menu,
+.popover,
+.suggestion-container {
+  border: 1px solid var(--s-rule);
+  background: var(--s-paper);
+  box-shadow: 0 var(--s-1) var(--s-4) calc(var(--s-1) * -1) var(--s-shadow);
+}
+
+.menu-item.selected:not(.is-label),
+.suggestion-item.is-selected,
+.vertical-tab-nav-item.is-active {
+  color: var(--s-ink-strong);
+  background: var(--s-raised);
+}
+
+.search-result-file-matched-text,
+.is-flashing {
+  color: var(--s-ink-strong);
+  background: var(--s-mark);
+}
+
+::selection {
+  background: var(--text-selection);
+}
+
+/* ============================================================
+   导出 PDF / 打印
+   ============================================================ */
+
+@media print {
+  .markdown-preview-view,
+  .markdown-rendered {
+    background: #ffffff;
+  }
+
+  .markdown-rendered :is(pre, blockquote, table, img, .callout) {
+    break-inside: avoid;
+  }
+
+  .markdown-rendered :is(h1, h2, h3, h4, h5, h6) {
+    break-after: avoid;
+  }
+}

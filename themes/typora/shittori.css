@@ -1,0 +1,954 @@
+@charset "UTF-8";
+@import "shittori/dark.css" screen and (prefers-color-scheme: dark);
+/*
+ * Shittori しっとり — 日常笔记主题（中文为主，兼顾英文与少量日文）。
+ * しっとり：润泽、沉静、不张扬。
+ * 暖白纸色、暖黑墨色，全篇只用一种强调色；层级靠字号、字重与留白。
+ * 浅色：松葉 MATSUBA 绿。深色：藍 AI 色调，跟随系统外观自动切换。
+ * Shittori Night 强制使用同一套深色；导出 PDF 始终使用浅色、白底。
+ * 深色配色单独放在 shittori/dark.css，两个主题共用，只需改一处。
+ * 色名参考 nipponcolors.com；深色各值为适配背景调整过的近似色。
+ * 字体均调用本机已安装版本：思源宋体 VF、Source Serif 4、霞鹜文楷、楷体-简、
+ * JetBrains Mono。无任何外部资源。
+ * 所有颜色集中在 :root 的 --s-* 变量里，改配色只需改变量。
+ * Keep this filename lowercase so Typora can discover the theme.
+ */
+
+/* 中文弯引号、破折号、省略号交给宋体，避免被西文字体排成半宽。
+ * 单引号 U+2019 留给西文，保证英文撇号（don’t）宽度正常。 */
+@font-face {
+  font-family: "Shittori Punct";
+  src: local("SourceHanSerifSCVF-Regular"), local("Source Han Serif SC VF"),
+    local("STSongti-SC-Regular");
+  font-weight: 200 900;
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct Title";
+  src: local("FZDBSJW--GB1-0"), local("SourceHanSerifSCVF-Bold");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct Kai";
+  src: local("STKaitiSC-Regular"), local("FZKTK--GBK1-0");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+@font-face {
+  font-family: "Shittori Punct WenKai";
+  src: local("LXGWWenKai-Regular"), local("STKaitiSC-Regular");
+  unicode-range: U+201C-201D, U+2014, U+2026;
+}
+
+:root {
+  /* == 字体 == */
+  --s-serif: "Shittori Punct", "Source Serif 4", "Source Han Serif SC VF",
+    "Source Han Serif SC", "Songti SC", "Hiragino Mincho ProN", serif;
+  /* 一级标题：方正大标宋，宋体的标题款；只有一个字重，只含简体常用字，
+   * 假名与生僻字回落到思源宋体。英文用 EB Garamond 的粗体与之配重。
+   * 改回与正文相同：--s-h1: var(--s-serif); --s-h1-weight: 600; */
+  --s-h1: "Shittori Punct Title", "EB Garamond", "FZDaBiaoSong-B06S",
+    "Source Han Serif SC VF", "Songti SC", serif;
+  --s-h1-weight: 700;
+  /* 引用：楷体-简，自带粗体，引用里的加粗是真字形。 */
+  --s-kai: "Shittori Punct Kai", "Source Serif 4", "Kaiti SC", "FZKai-Z03",
+    "LXGW WenKai", serif;
+  /* 强调：霞鹜文楷，与宋体接近，靠强调色拉开。 */
+  --s-em: "Shittori Punct WenKai", "Source Serif 4", "LXGW WenKai", "Kaiti SC",
+    serif;
+  --s-mono: "JetBrains Mono", "SF Mono", Menlo, "PingFang SC", monospace;
+  --s-ui: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans",
+    sans-serif;
+  --monospace: var(--s-mono);
+
+  /* == 版面 == */
+  /* 全部尺寸出自下面这一组，规则里不再出现零散的数值。
+   * 纵向单位 u = 8px。正文 18px、行高 4u = 32px（9:16）。
+   *   纵向间距只取 u 的 1、2、3、4、6、8、12 倍：
+   *   1 列表项之间 · 2 段落之间（半行）· 3 引用、代码、表格等块的上下
+   *   4 一行 · 6 小节（H3）之前 · 8 章（H2）之前 · 12 文末留白
+   * 横向单位是字宽 em：版心 40 字，列表缩进 2 字，引用与单元格内缩 1 字，
+   *   行内留空取四分之一字（0.25em）或八分之一字（0.125em）。
+   * 字号只有八级：12 14 16 18 20 24 32 40。
+   *   40 H1（行高 7u）· 32 备用 · 24 H2 · 20 H3 · 18 正文与 H4 · 16 表格、脚注、行内代码与 H5
+   *   14 代码块（版心内恰好容纳 80 列）、标签与 H6 · 12 上下标
+   * 字重三级：400 正文 · 600 标题 · 700 加粗（H4、H5 与正文同级字号，用 700 区分）。
+   * 圆角两级：2px 行内 · 4px 块。线宽两级：1px 细线 · 2px 引用与提示块的侧线。
+   * --s-k 是整体缩放：屏幕 1；打印 0.8（正文约 11pt），所有比例不变。 */
+  --s-k: 1;
+  --s-u: calc(8px * var(--s-k));
+  --s-1: var(--s-u);
+  --s-2: calc(var(--s-u) * 2);
+  --s-3: calc(var(--s-u) * 3);
+  --s-4: calc(var(--s-u) * 4);
+  --s-6: calc(var(--s-u) * 6);
+  --s-7: calc(var(--s-u) * 7);
+  --s-8: calc(var(--s-u) * 8);
+  --s-12: calc(var(--s-u) * 12);
+  --s-f12: calc(12px * var(--s-k));
+  --s-f14: calc(14px * var(--s-k));
+  --s-f16: calc(16px * var(--s-k));
+  --s-f18: calc(18px * var(--s-k));
+  --s-f20: calc(20px * var(--s-k));
+  --s-f24: calc(24px * var(--s-k));
+  --s-f32: calc(32px * var(--s-k));
+  --s-f40: calc(40px * var(--s-k));
+  --s-measure: 40em; /* 每行 40 个汉字 */
+
+  /* == 浅色：纸、墨、松葉 == */
+  --s-scheme: light;
+  --s-smoothing: auto;
+  --s-body-weight: 400;
+  --s-paper: #f9f6ef;
+  --s-paper-side: #f2eee5;
+  --s-surface: #f2eee4; /* 代码块、行内代码 */
+  --s-raised: #ebe6da; /* 悬停、选中项 */
+  --s-rule: #ddd6c8; /* 细线 */
+  --s-ink: #2b2926;
+  --s-ink-strong: #1c1b19;
+  --s-ink-soft: #6a655c; /* 引用、次要文字 */
+  --s-ink-faint: #a19a8d; /* 标记符号、注释 */
+  --s-accent: #42602d; /* 松葉 MATSUBA */
+  --s-accent-line: rgba(66, 96, 45, 0.38);
+  --s-select: rgba(66, 96, 45, 0.18);
+  --s-table-line: rgba(43, 41, 38, 0.07); /* 表格行线 */
+  --s-table-head-line: rgba(43, 41, 38, 0.22); /* 表头线与末行线 */
+  --s-mark: #f5dc7d; /* 刈安 KARIYASU：全篇唯一的高饱和色，只给 ==高亮== */
+  --s-strong: var(--s-ink-strong); /* 加粗只加重；想带色改成 var(--s-accent) */
+
+  /* 语法高亮：五种低饱和色，其余沿用墨色 */
+  --s-syn-keyword: #42602d; /* 松葉 */
+  --s-syn-string: #8a4b2d; /* 柿渋 */
+  --s-syn-number: #7d5f16; /* 黄土 */
+  --s-syn-def: #1f5a73; /* 藍 */
+  --s-syn-comment: #a19a8d;
+
+  /* 提示块 */
+  --s-note: #2f6480;
+  --s-tip: #42602d;
+  --s-important: #6a4a7c;
+  --s-warning: #8a6414;
+  --s-caution: #9a3f2d;
+  --s-alert-tint: 5%; /* 提示块底色的浓度 */
+
+  /* == Typora 界面变量 == */
+  --bg-color: var(--s-paper);
+  --side-bar-bg-color: var(--s-paper-side);
+  --text-color: var(--s-ink);
+  --primary-color: var(--s-accent);
+  --primary-btn-border-color: var(--s-accent);
+  --primary-btn-text-color: var(--s-paper);
+  --select-text-bg-color: var(--s-select);
+  --select-text-font-color: inherit;
+  --search-select-bg-color: var(--s-mark);
+  --item-hover-bg-color: var(--s-raised);
+  --item-hover-text-color: var(--s-ink-strong);
+  --control-text-color: var(--s-ink-soft);
+  --control-text-hover-color: var(--s-ink-strong);
+  --window-border: 1px solid var(--s-rule);
+  --active-file-bg-color: var(--s-raised);
+  --active-file-text-color: var(--s-ink-strong);
+  --active-file-border-color: var(--s-accent);
+  --rawblock-edit-panel-bd: var(--s-surface);
+  --md-char-color: var(--s-ink-faint);
+  --heading-char-color: var(--s-ink-faint);
+  --meta-content-color: var(--s-ink-soft);
+  --blur-text-color: var(--s-ink-faint);
+  --mermaid-theme: neutral;
+
+  color-scheme: var(--s-scheme);
+}
+
+/* ============================================================
+   文稿区
+   ============================================================ */
+
+html,
+body,
+content {
+  background-color: var(--s-paper);
+}
+
+#write {
+  max-width: calc(var(--s-measure) + 4em);
+  padding: var(--s-6) 2em var(--s-12);
+  font-family: var(--s-serif);
+  font-size: var(--s-f18);
+  font-weight: var(--s-body-weight);
+  line-height: var(--s-4);
+  color: var(--s-ink);
+  caret-color: var(--s-accent);
+  -webkit-font-smoothing: var(--s-smoothing);
+  font-kerning: normal;
+  font-synthesis: none; /* 不合成假粗体、假斜体 */
+  text-autospace: normal; /* 中西文之间自动留出间隙 */
+  overflow-wrap: break-word;
+}
+
+/* 少量日文：标注 lang="ja" 的片段改用明朝体字形。 */
+#write :lang(ja) {
+  font-family: "Source Serif 4", "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+#write ::selection {
+  background-color: var(--s-select);
+}
+
+/* 段落：左对齐，段间距半行。 */
+#write p {
+  margin: var(--s-2) 0;
+  text-align: left; /* 默认左对齐；想两端对齐改成 justify */
+}
+
+/* 列表、引用、表格里行短且中西混排多，左对齐避免字距被拉开。 */
+#write li p,
+#write blockquote p,
+#write .md-alert p,
+#write td p,
+#write th p {
+  text-align: left;
+}
+
+/* ---------- 标题：与正文同一家族，只靠字号、字重与留白 ---------- */
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  font-family: var(--s-serif);
+  font-weight: 600;
+  line-height: var(--s-4);
+  color: var(--s-ink-strong);
+  text-align: left;
+  break-after: avoid;
+}
+
+/* 一级标题是全篇唯一居中的元素；字体是宋体的标题款（见 --s-h1）。 */
+#write h1 {
+  font-family: var(--s-h1);
+  font-weight: var(--s-h1-weight);
+  font-size: var(--s-f40);
+  text-align: center;
+  margin: var(--s-6) 0 var(--s-4);
+  line-height: var(--s-7);
+}
+
+#write h2 {
+  font-size: var(--s-f24);
+  margin: var(--s-8) 0 var(--s-2);
+  padding-bottom: calc(var(--s-1) - 1px);
+  border-bottom: 1px solid var(--s-rule);
+}
+
+#write h3 {
+  font-size: var(--s-f20);
+  margin: var(--s-6) 0 var(--s-2);
+}
+
+#write h4 {
+  font-size: var(--s-f18);
+  font-weight: 700;
+  margin: var(--s-4) 0 var(--s-1);
+}
+
+#write h5 {
+  font-size: var(--s-f16);
+  font-weight: 700;
+  color: var(--s-ink-soft);
+  margin: var(--s-4) 0 var(--s-1);
+}
+
+#write h6 {
+  font-size: var(--s-f14);
+  font-weight: 600;
+  color: var(--s-ink-faint);
+  letter-spacing: 0.05em;
+  margin: var(--s-4) 0 var(--s-1);
+}
+
+#write > h1:first-child,
+#write > h2:first-child,
+#write > h3:first-child {
+  margin-top: 0;
+}
+
+/* 标题紧跟标题时收紧间距。 */
+#write h1 + h2,
+#write h2 + h3,
+#write h3 + h4 {
+  margin-top: var(--s-2);
+}
+
+/* ---------- 行内 ---------- */
+
+/* 加粗只加重，不变色（由 --s-strong 控制）。 */
+#write strong {
+  font-weight: 700;
+  color: var(--s-strong);
+}
+
+/* 强调：中文霞鹜文楷，英文真斜体，并带强调色，与宋体正文拉开。 */
+#write em {
+  font-family: var(--s-em);
+  font-style: italic;
+  color: var(--s-accent);
+}
+
+#write a em {
+  color: inherit;
+}
+
+/* 强调 + 加粗（***文字***）：仍是强调的字体与颜色，只是加重。
+ * 霞鹜文楷最重的一级是 Medium，这里用的就是它，不合成。 */
+#write em strong,
+#write strong em {
+  font-family: var(--s-em);
+  font-weight: 700;
+  color: var(--s-accent);
+}
+
+#write a :is(em strong, strong em) {
+  color: inherit;
+}
+
+#write :is(h1, h2, h3, h4, h5, h6) :is(strong, em) {
+  font-weight: inherit;
+  color: inherit;
+}
+
+#write a {
+  color: var(--s-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--s-accent-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+#write a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* 高亮：整行高的荧光笔。强调的三级阶梯是
+ * 楷体（语气）→ 加粗（重点）→ 高亮（必须回看）。 */
+#write mark {
+  color: var(--s-ink-strong);
+  background: var(--s-mark);
+  padding: 0.1em 0.125em;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+#write del {
+  color: var(--s-ink-faint);
+}
+
+/* 上下标、脚注标号都与所在文字同色，只靠位置与字号区分。 */
+#write sup,
+#write sub {
+  font-size: calc(12em / 18);
+  line-height: 0; /* 不撑高所在行 */
+  color: inherit;
+}
+
+#write kbd {
+  font-family: var(--s-mono);
+  font-size: calc(14em / 18);
+  line-height: 1;
+  color: var(--s-ink-soft);
+  background: var(--s-paper);
+  border: 1px solid var(--s-rule);
+  border-radius: 2px;
+  box-shadow: none;
+  padding: 0.1em 0.25em;
+}
+
+/* ---------- 列表 ---------- */
+
+#write ul,
+#write ol {
+  margin: var(--s-2) 0;
+  padding-left: 2em;
+}
+
+#write li {
+  margin: 0;
+}
+
+#write li > p {
+  margin: var(--s-1) 0;
+}
+
+#write li::marker {
+  color: var(--s-ink-faint);
+}
+
+#write ol > li::marker {
+  font-variant-numeric: tabular-nums;
+  color: var(--s-ink-soft);
+}
+
+#write ul ul,
+#write ul ol,
+#write ol ul,
+#write ol ol {
+  margin: 0;
+}
+
+#write input[type="checkbox"] {
+  accent-color: var(--s-accent);
+}
+
+#write .md-task-list-item.task-list-done > p,
+#write .md-task-list-item.task-list-done {
+  color: var(--s-ink-faint);
+}
+
+/* ---------- 引用：细线、楷体、无底色 ---------- */
+
+#write blockquote {
+  margin: var(--s-3) 0;
+  padding: 0 0 0 1em;
+  border-left: 2px solid var(--s-rule);
+  background: none;
+  font-family: var(--s-kai);
+  color: var(--s-ink-soft);
+}
+
+#write blockquote p {
+  margin: var(--s-1) 0;
+}
+
+#write blockquote em {
+  font-family: var(--s-serif);
+}
+
+#write blockquote blockquote {
+  margin: var(--s-1) 0;
+}
+
+/* ---------- 提示块（> [!NOTE] 等）：色线、小标签，加一层极淡的同色底 ----------
+ * Typora 把它渲染成带 .md-alert 与 .md-alert-<类型> 两个类的引用块，
+ * 第一行是 .md-alert-text-container（图标 + 标签文字），其后是正文段落。
+ * 底色由该类型的颜色按 --s-alert-tint 的比例与透明混合而来。 */
+
+#write .md-alert {
+  --s-alert: var(--s-note);
+  margin: var(--s-3) 0;
+  padding: var(--s-1) 1em;
+  border-left: 2px solid var(--s-alert);
+  border-radius: 0 4px 4px 0;
+  background: color-mix(in srgb, var(--s-alert) var(--s-alert-tint), transparent);
+  font-family: var(--s-serif);
+  color: var(--s-ink);
+}
+
+#write .md-alert-tip {
+  --s-alert: var(--s-tip);
+}
+
+#write .md-alert-important {
+  --s-alert: var(--s-important);
+}
+
+#write .md-alert-warning {
+  --s-alert: var(--s-warning);
+}
+
+#write .md-alert-caution {
+  --s-alert: var(--s-caution);
+}
+
+#write .md-alert .md-alert-text-container,
+#write .md-alert .md-alert-text {
+  font-family: var(--s-ui);
+  font-size: var(--s-f14);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--s-alert) !important;
+}
+
+#write .md-alert .md-alert-text-container svg {
+  fill: currentColor !important;
+}
+
+/* ---------- 代码 ---------- */
+
+#write code,
+#write tt {
+  font-family: var(--s-mono);
+  font-size: calc(16em / 18);
+  line-height: 1; /* 等宽字体的度量不同，不让它撑高所在行 */
+  font-variant-ligatures: none;
+  color: var(--s-ink);
+  background-color: var(--s-surface);
+  border: 0;
+  border-radius: 2px;
+  padding: 0.1em 0.25em;
+  margin: 0 0.125em;
+}
+
+#write .md-fences,
+#write pre.md-fences {
+  font-family: var(--s-mono);
+  font-size: var(--s-f14);
+  line-height: var(--s-3);
+  color: var(--s-ink);
+  background-color: var(--s-surface);
+  border: 0;
+  border-radius: 4px;
+  padding: var(--s-2);
+  margin: var(--s-3) 0;
+  break-inside: avoid;
+  box-shadow: inset 0 0 0 1px var(--s-rule);
+}
+
+.md-fences .CodeMirror,
+.md-fences .CodeMirror-gutters,
+.cm-s-inner.CodeMirror {
+  background: transparent;
+  color: var(--s-ink);
+  font-family: var(--s-mono);
+}
+
+.md-fences .CodeMirror-gutters {
+  border-right: 1px solid var(--s-rule);
+}
+
+.md-fences .CodeMirror-linenumber {
+  color: var(--s-ink-faint);
+}
+
+.CodeMirror div.CodeMirror-cursor {
+  border-left: 1px solid var(--s-accent);
+}
+
+.cm-s-inner div.CodeMirror-selected,
+.cm-s-inner .CodeMirror-selectedtext {
+  background: var(--s-select) !important;
+}
+
+.cm-s-inner .cm-keyword,
+.cm-s-inner .cm-tag,
+.cm-s-inner .cm-builtin {
+  color: var(--s-syn-keyword);
+}
+
+.cm-s-inner .cm-string,
+.cm-s-inner .cm-string-2,
+.cm-s-inner .cm-attribute {
+  color: var(--s-syn-string);
+}
+
+.cm-s-inner .cm-number,
+.cm-s-inner .cm-atom {
+  color: var(--s-syn-number);
+}
+
+.cm-s-inner .cm-def,
+.cm-s-inner .cm-type,
+.cm-s-inner .cm-variable-3,
+.cm-s-inner .cm-qualifier {
+  color: var(--s-syn-def);
+}
+
+.cm-s-inner .cm-comment,
+.cm-s-inner .cm-meta {
+  color: var(--s-syn-comment);
+}
+
+.cm-s-inner .cm-variable,
+.cm-s-inner .cm-variable-2,
+.cm-s-inner .cm-property,
+.cm-s-inner .cm-operator,
+.cm-s-inner .cm-bracket,
+.cm-s-inner .cm-punctuation {
+  color: var(--s-ink);
+}
+
+.cm-s-inner .cm-error {
+  color: var(--s-caution);
+  background: none;
+}
+
+.cm-s-inner .CodeMirror-matchingbracket {
+  color: var(--s-accent) !important;
+  text-decoration: underline;
+}
+
+/* 代码块右下角的语言标签。 */
+.md-fences .code-tooltip,
+div.code-tooltip {
+  font-family: var(--s-ui);
+  color: var(--s-ink-soft);
+  background: var(--s-paper);
+  border: 1px solid var(--s-rule);
+  box-shadow: none;
+}
+
+/* ---------- 公式 ---------- */
+
+#write .md-math-block,
+#write .mathjax-block {
+  margin: var(--s-3) 0;
+}
+
+#write .md-math-block .md-rawblock-container,
+#write mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#write .md-rawblock-control,
+#write .md-rawblock-tooltip,
+#write .md-rawblock-input {
+  background-color: var(--s-surface);
+  color: var(--s-ink-soft);
+}
+
+/* ---------- 表格：只留横线，逐行细线引导视线，数字等宽对齐 ----------
+ * 行线的做法参考 Claude Light：表头下一条较深的线，每行下一条浅线，
+ * 无竖线、无斑马纹；悬停时整行浅染，方便横向对读。 */
+
+#write figure.table-figure,
+#write .md-table-fig {
+  margin: var(--s-3) 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  break-inside: avoid;
+}
+
+/* 列多时在表格内部横向滚动，不撑破版心。 */
+#write .md-table-fig.table-figure:not(.md-focus) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+#write .md-table-fig.table-figure:focus,
+#write .md-table-fig.table-figure:focus-visible {
+  outline: none;
+}
+
+#write table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0;
+  font-size: var(--s-f16);
+  line-height: var(--s-3);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+#write table tr,
+#write table tr:nth-child(2n),
+#write thead,
+#write tbody {
+  background: none;
+  border: 0;
+}
+
+#write table th,
+#write table td {
+  border: 0;
+  padding: var(--s-1) 1em;
+  vertical-align: top;
+  box-shadow: inset 0 -1px 0 var(--s-table-line);
+}
+
+#write table th {
+  font-weight: 600;
+  text-align: left; /* 表头默认左对齐；Markdown 里指定的对齐方式仍然优先 */
+  color: var(--s-ink-strong);
+  background: none;
+  box-shadow: inset 0 -1px 0 var(--s-table-head-line);
+}
+
+#write table tbody tr:last-child td {
+  box-shadow: inset 0 -1px 0 var(--s-table-head-line);
+}
+
+#write table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+#write table tbody tr:hover {
+  background-color: var(--s-surface);
+}
+
+.ty-table-edit {
+  font-family: var(--s-ui);
+  background: var(--s-paper);
+  border: 1px solid var(--s-rule);
+  color: var(--s-ink-soft);
+}
+
+/* ---------- 分割线、图片 ---------- */
+
+#write hr {
+  width: 10em;
+  height: 1px;
+  margin: var(--s-6) auto calc(var(--s-6) - 1px); /* 连同 1px 线高合计 12u */
+  border: 0;
+  background-color: var(--s-ink-faint);
+}
+
+#write img {
+  max-width: 100%;
+  border-radius: 2px;
+}
+
+#write p > .md-image:only-child {
+  display: block;
+  text-align: center;
+}
+
+#write .md-image > .md-meta {
+  font-family: var(--s-mono);
+  font-size: var(--s-f14);
+  color: var(--s-ink-faint);
+}
+
+/* ---------- 脚注、目录、元数据 ---------- */
+
+#write .md-footnote {
+  font-family: var(--s-ui);
+  font-size: calc(12em / 18);
+  font-weight: 400;
+  color: inherit;
+  background: none;
+  padding: 0 0.125em;
+}
+
+#write .footnotes-area {
+  margin-top: var(--s-6);
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--s-rule);
+  font-size: var(--s-f16);
+  color: var(--s-ink-soft);
+  line-height: var(--s-3);
+}
+
+#write .footnotes-area hr {
+  display: none;
+}
+
+#write .md-def-name {
+  color: var(--s-ink-soft);
+}
+
+#write .md-toc {
+  margin: var(--s-3) 0 var(--s-4);
+  font-size: var(--s-f16);
+}
+
+#write .md-toc-content {
+  padding: 0;
+}
+
+#write .md-toc-item {
+  color: var(--s-ink-soft);
+  line-height: var(--s-4);
+}
+
+#write .md-toc-h1 {
+  font-weight: 600;
+  color: var(--s-ink);
+}
+
+#write .md-toc-inner {
+  text-decoration: none;
+  border: 0;
+}
+
+#write .md-toc-inner:hover {
+  color: var(--s-accent);
+}
+
+#write div.md-toc-tooltip {
+  font-family: var(--s-ui);
+  background: var(--s-paper);
+  color: var(--s-ink-soft);
+}
+
+#write pre.md-meta-block {
+  font-family: var(--s-mono);
+  font-size: var(--s-f14);
+  line-height: var(--s-3);
+  color: var(--s-ink-faint);
+  background: none;
+  border-bottom: 1px solid var(--s-rule);
+  padding: 0 0 var(--s-2);
+  margin: 0 0 var(--s-4);
+}
+
+/* 内联 HTML（如 <sup>、<sub>）渲染出的文字保持正文的字体与颜色。 */
+#write .md-html-inline {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+#write .md-comment,
+#write .md-tag {
+  font-family: var(--s-mono);
+  font-size: calc(16em / 18);
+  color: var(--s-ink-faint);
+}
+
+/* ============================================================
+   Typora 界面
+   ============================================================ */
+
+/* 专注模式：非当前段落退成淡墨。 */
+.on-focus-mode #write > .md-end-block:not(.md-focus):not(.md-focus-container) {
+  color: var(--s-ink-faint);
+}
+
+.on-focus-mode #write .md-focus :is(h1, h2, h3, h4, h5, h6),
+.on-focus-mode #write > :is(h1, h2, h3, h4, h5, h6).md-focus {
+  color: var(--s-ink-strong);
+}
+
+/* 源代码模式沿用同一组纸、墨与强调色。 */
+#typora-source,
+.cm-s-typora-default.CodeMirror {
+  background-color: var(--s-paper);
+  color: var(--s-ink);
+}
+
+#typora-source .CodeMirror-lines {
+  max-width: calc(var(--s-measure) + 6em);
+}
+
+.cm-s-typora-default .CodeMirror-line {
+  font-family: var(--s-mono);
+}
+
+.cm-s-typora-default .cm-header,
+.cm-s-typora-default .cm-property {
+  color: var(--s-ink-strong);
+}
+
+.cm-s-typora-default .cm-link,
+.cm-s-typora-default .cm-url {
+  color: var(--s-accent);
+}
+
+.cm-s-typora-default .cm-comment,
+.cm-s-typora-default .cm-code,
+.cm-s-typora-default .cm-string {
+  color: var(--s-syn-string);
+}
+
+.cm-s-typora-default .cm-atom,
+.cm-s-typora-default .cm-number {
+  color: var(--s-syn-number);
+}
+
+.cm-s-typora-default .cm-meta,
+.cm-s-typora-default .cm-quote {
+  color: var(--s-ink-soft);
+}
+
+.cm-s-typora-default div.CodeMirror-selected {
+  background: var(--s-select);
+}
+
+/* 侧栏、大纲与文件列表：系统无衬线，层次靠深浅。 */
+#typora-sidebar {
+  font-family: var(--s-ui);
+  background-color: var(--s-paper-side);
+  color: var(--s-ink-soft);
+  border-right: 1px solid var(--s-rule);
+}
+
+.outline-item {
+  line-height: 1.75;
+}
+
+.outline-item:hover,
+.file-node-content:hover,
+.file-list-item:hover {
+  background-color: var(--s-raised);
+}
+
+.outline-item-active > .outline-item .outline-label,
+.outline-label:hover {
+  color: var(--s-accent);
+}
+
+.file-list-item.active,
+.file-node-content.active,
+.file-tree-node.active > .file-node-background {
+  background-color: var(--s-raised);
+  color: var(--s-ink-strong);
+}
+
+.file-list-item-summary {
+  font-family: var(--s-ui);
+  color: var(--s-ink-faint);
+}
+
+.md-search-hit {
+  background: var(--s-mark);
+  color: inherit;
+}
+
+.popover,
+.dropdown-menu,
+.auto-suggest-container,
+#typora-quick-open,
+#md-searchpanel,
+footer.ty-footer {
+  font-family: var(--s-ui);
+  background-color: var(--s-paper);
+  color: var(--s-ink);
+  border-color: var(--s-rule);
+}
+
+#typora-quick-open input,
+#md-searchpanel input,
+.ty-input {
+  background-color: var(--s-surface);
+  color: var(--s-ink);
+  border-color: var(--s-rule);
+}
+
+.popover-title {
+  background-color: var(--s-surface);
+  color: var(--s-ink);
+}
+
+/* ============================================================
+   导出 PDF / 打印：白底，版心由纸张边距决定
+   ============================================================ */
+
+@media print {
+  :root {
+    --s-paper: #ffffff;
+    --s-k: 0.8; /* 18px × 0.8 = 14.4px ≈ 11pt */
+  }
+
+  html,
+  body,
+  #write {
+    background: #ffffff !important;
+  }
+
+  #write {
+    max-width: none;
+    padding: 0;
+  }
+
+  #write table tbody tr:hover {
+    background: none;
+  }
+
+  #write :is(pre, figure, blockquote, .md-alert, img) {
+    break-inside: avoid;
+  }
+}

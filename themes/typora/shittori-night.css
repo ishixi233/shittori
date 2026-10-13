@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/*
+ * Shittori Night — Shittori 的固定深色版（藍色调），不依赖系统外观。
+ * 版式、字体与全部规则来自 shittori.css，配色来自 shittori/dark.css。
+ * Keep shittori.css and the shittori folder beside this file.
+ * 导出 PDF 仍使用 Shittori 的浅色、白底。
+ */
+@import "shittori.css";
+@import "shittori/dark.css" screen;
