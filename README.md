@@ -137,7 +137,7 @@ Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirre
 - [Typora 官方主题站投稿](https://github.com/typora/theme.typora.io/pull/578)：等待维护者审核。
 - [Rime 官方社区展示](https://github.com/orgs/rime/discussions/2222)：鼠须管皮肤。
 - [同文官方社区展示](https://github.com/osfans/trime/discussions/2166)：Android 九宫格主题。
-- [Obsidian 官方主题页 · Matsuba](https://community.obsidian.md/themes/matsuba)：条目已公开，审核进行中；也可从[独立仓库](https://github.com/ishixi233/shittori-obsidian)下载手动安装。
+- [Obsidian 官方主题页 · Matsuba](https://community.obsidian.md/themes/matsuba)：已公开，官网已开放安装入口；也可从[独立仓库](https://github.com/ishixi233/shittori-obsidian)下载手动安装。
 
 ## 相关主题与配色参考
 
