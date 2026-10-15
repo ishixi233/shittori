@@ -2,7 +2,7 @@
 
 Matsuba 是 Shittori 系列的 Obsidian 主题，适合中文长文和中英混排笔记。浅色用暖纸白和松叶绿，深色用蓝灰和浅蓝；通过字号、字重和留白区分层级，让颜色留给链接、高亮和提示。
 
-[全平台项目](https://github.com/ishixi233/shittori) · [下载](https://github.com/ishixi233/shittori-obsidian/releases/tag/1.0.1) · [反馈问题](https://github.com/ishixi233/shittori-obsidian/issues)
+[全平台项目](https://github.com/ishixi233/shittori) · [下载](https://github.com/ishixi233/shittori-obsidian/releases/tag/1.0.2) · [反馈问题](https://github.com/ishixi233/shittori-obsidian/issues)
 
 ![浅色与深色预览](screenshot.png)
 
@@ -43,3 +43,21 @@ Matsuba 是 Shittori 系列的 Obsidian 主题，适合中文长文和中英混�
 ## 许可
 
 [MIT](LICENSE)。反馈时请附 Obsidian 版本、操作系统、阅读或编辑模式，以及最小复现示例。
+
+## English
+
+Matsuba is the Obsidian edition of the Shittori theme family, designed for Chinese long-form writing and mixed Chinese–English notes. Light mode pairs warm paper-white with pine-green accents; dark mode uses blue-gray and pale blue. Font size, weight, and spacing establish hierarchy, while color emphasizes links and highlights.
+
+The theme supports reading view and live preview. The optional Style Settings plugin exposes controls for colored bold text, using the body font for H1 headings, and justified paragraphs. Its settings group remains named **Shittori** to preserve existing preferences.
+
+### Installation
+
+Download `theme.css` and `manifest.json` from the latest release, place both files in `.obsidian/themes/Matsuba/` inside your vault, then select **Matsuba** in Settings → Appearance. The minimum Obsidian version is 1.8.0. Users upgrading from the manually installed Shittori theme can rename its folder to `Matsuba`, replace both files, and select Matsuba again.
+
+### Fonts and compatibility
+
+The theme uses locally installed fonts and makes no network requests. Preferred fonts include Source Han Serif, Source Serif 4, EB Garamond, LXGW WenKai, and JetBrains Mono. The Chinese H1 font, FZ Da Biao Song, is optional and subject to its own license. Fonts are not bundled; system fallbacks are used when they are unavailable.
+
+Screenshots show the actual reading view in Obsidian 1.14.4 on macOS, with an additional first-line indentation snippet enabled. The theme itself does not add that indentation. Windows, Linux, and mobile have not been tested. Existing CSS snippets and plugin styles can affect rendering. The directory's CSS scanner reports partial-support warnings for some browser features and treats the MathJax `mjx-container` tag as unknown; these are warnings, not proof of full cross-platform compatibility.
+
+The theme is released under the [MIT license](LICENSE). Please include your Obsidian version, operating system, view mode, and a minimal example when reporting an issue.
