@@ -1,6 +1,6 @@
 # Shittori しっとり · 笔记与输入法主题
 
-为自己设计的一套主题，用于 Typora、Obsidian、macOS 鼠须管（Squirrel）和 Android 同文（Trime）。笔记主题以中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔；输入法皮肤延续相同的暖纸白、松叶绿与深色蓝灰配色。笔记主题创建于 2026-10-11 至 10-12，鼠须管皮肤于 2026-10-13 加入。
+为自己设计的一套主题，用于 Typora、Obsidian、macOS 鼠须管（Squirrel）和 Android 同文（Trime）。笔记主题以中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔；输入法皮肤延续相同的暖纸白、松叶绿与深色蓝灰配色。
 
 名字取自日语「しっとり」：润泽、沉静、不张扬。罗马字里双写的 t 是促音，不能省。
 
@@ -17,6 +17,7 @@
 - [样式测试](<样式测试.md>)：把主题处理过的元素各用一遍的测试文档，换主题或改变量后打开它检查。
 - [鼠须管皮肤](<themes/squirrel/README.md>)：松叶 / 蓝夜两套配色、安装方法、紧凑候选框与调整参数。
 - [同文九宫格](<themes/trime/README.md>)：Android 拼音九宫格、松叶 / 蓝夜配色、一级剪贴板与编辑工具栏。
+- [主题示例](Theme-Preview.md)：投稿截图使用的中英混排短文。
 - 预览图在 [figures](<figures/>)，各软件的主题文件在 [themes](<themes/>)。
 
 ## 预览
@@ -35,11 +36,18 @@ Obsidian 阅读模式（浅色、深色）与实时预览：
 
 ![Obsidian 实时预览](<figures/obsidian-live-preview.png>)
 
-这些图都是在 Chrome 里用模拟的页面结构渲染的，不是两个软件的实际截图。Obsidian 的图叠加了它自带的样式表，较接近真实效果；Typora 的图只能说明排版和配色。
+Typora 和 Obsidian 的浅深色阅读图来自 macOS 上的实际应用，已裁剪为文章区域。Obsidian 截图环境启用了首行缩进片段，主题本身不含缩进。实时预览图仍是模拟页面，只用于说明排版；同文预览也属于布局示意。
 
 ## 成品在哪里
 
-正在使用的文件在各软件自己的目录里。本项目保留 Typora、Obsidian、鼠须管和同文的成品主题与使用说明。
+本项目保留四个平台的主题源文件与安装说明。可按平台单独下载：
+
+| 平台 | 下载与说明 |
+|---|---|
+| Typora | [主题包](https://github.com/ishixi233/shittori/releases/tag/typora-1.0.0) · [安装说明](themes/typora/README.md) |
+| Obsidian | [独立主题仓库](https://github.com/ishixi233/shittori-obsidian) · [安装说明](themes/obsidian/README.md) |
+| 鼠须管 | [皮肤包](https://github.com/ishixi233/shittori/releases/tag/squirrel-1.0.0) · [安装说明](themes/squirrel/README.md) |
+| 同文 | [主题包](https://github.com/ishixi233/shittori/releases/tag/trime-2.0.0) · [安装说明](themes/trime/README.md) |
 
 | 软件 | 正在使用的位置 | 本项目里的文件 |
 |---|---|---|
@@ -94,7 +102,7 @@ Typora 和 Obsidian 调用本机已安装的字体，主题里没有任何外部
 
 ## 日常调整
 
-**Obsidian** 装了 Style Settings 插件，「设置 → Style Settings → Shittori」里有三个开关：
+**Obsidian** 安装 Style Settings 插件后，「设置 → Style Settings → Shittori」里有三个开关：
 
 - 加粗带强调色（默认关：加粗只加重）
 - 一级标题用正文字体（默认关：H1 用方正大标宋 + EB Garamond）
@@ -118,4 +126,21 @@ Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirre
 - **H1 的字体覆盖有限。** 方正大标宋只含简体常用字，标题里的假名和生僻字会回落到思源宋体粗体。
 - **图片和公式会打破 8px 的纵向网格**，之后的内容不再落在格子上。
 - **Typora 的提示块只认五种**（NOTE、TIP、IMPORTANT、WARNING、CAUTION），不支持 Obsidian 的自定义标题、折叠和其他类型。两边混用同一篇笔记时要留意。
-- **Obsidian 的首行缩进片段 `shouhang` 仍然启用**，它给每段加两字缩进，与 Typora 版（段间留白、不缩进）不同。
+- **额外 CSS 片段会改变主题效果。** 例如首行缩进片段会给每段加两字缩进；主题本身使用段间留白、不缩进。
+
+## 相关主题与配色参考
+
+如果想比较不同的排版和操作方式，可以从这些项目看起。它们各有侧重，不代表 Shittori 全部采用了对应实现。
+
+| 项目 | 平台 | 值得参考的地方 |
+|---|---|---|
+| [Minimal](https://github.com/kepano/obsidian-minimal) | Obsidian | 克制的界面、阅读层级和较完整的设置体系 |
+| [Ursine](https://github.com/noatpad/typora-theme-ursine) | Typora | 以 Bear 为灵感的排版，以及浅深色之间的协调 |
+| [Flexoki](https://github.com/kepano/flexoki) | 跨应用配色 | 纸张与墨色的关系，兼顾正文和代码 |
+| [Catppuccin Squirrel](https://github.com/catppuccin/squirrel) | 鼠须管 | 成套配色如何落到候选窗，以及多应用配色的一致性 |
+| [rime-pure](https://github.com/SivanLaai/rime-pure) | Rime / 同文 | 九宫格方案与键盘布局；使用前需核对分支和同文版本 |
+| [单静](https://github.com/nopdan/danjing) | 同文 | 功能键与编辑入口的安排；仓库已归档，适合参考布局 |
+
+## 许可
+
+Typora、Obsidian 和鼠须管主题采用 MIT；同文派生部分与附带字体分别保留 GPL 和 OFL 许可。详见[许可说明](LICENSE.md)。公开包不含私人短语、用户词库或语法模型。
