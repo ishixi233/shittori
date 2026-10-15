@@ -1,0 +1,116 @@
+schema:
+  schema_id: shittori_t9
+  name: Shittori · 雾凇九宫格
+  version: 2.0.0
+  author:
+  - lazypoems
+  description: Trime 3.3.12; numeric T9 based on Rime Ice vocabulary.
+switches:
+- name: ascii_mode
+  states:
+  - 中
+  - Ａ
+  reset: 0
+- name: ascii_punct
+  states:
+  - ¥
+  - $
+- name: traditionalization
+  states:
+  - 简
+  - 繁
+- name: emoji
+  reset: 1
+  states:
+  - 💀
+  - 😄
+- name: full_shape
+  states:
+  - 半角
+  - 全角
+engine:
+  processors:
+  - ascii_composer
+  - recognizer
+  - key_binder
+  - speller
+  - punctuator
+  - selector
+  - navigator
+  - express_editor
+  segmentors:
+  - ascii_segmentor
+  - matcher
+  - abc_segmentor
+  - punct_segmentor
+  - fallback_segmentor
+  translators:
+  - punct_translator
+  - table_translator@custom_phrase
+  - script_translator
+  filters:
+  - lua_filter@*shittori_t9_preedit
+  - simplifier@emoji
+  - simplifier@traditionalize
+  - uniquifier
+speller:
+  alphabet: '23456789'
+  initials: '23456789'
+  delimiter: ' '''
+  algebra:
+  - erase/^[A-Z]+$/
+  - erase/^hm$/
+  - erase/^m$/
+  - erase/^n$/
+  - erase/^ng$/
+  - abbrev/^([a-z]).+$/$1/
+  - abbrev/^([zcs]h).+$/$1/
+  - derive/^([nl])ve$/$1ue/
+  - derive/^([jqxy])u/$1v/
+  - xlit/abcdefghijklmnopqrstuvwxyz/22233344455566677778889999/
+translator:
+  dictionary: rime_ice
+  prism: shittori_t9
+  user_dict: rime_ice
+  enable_user_dict: true
+  enable_sentence: true
+  enable_completion: true
+  enable_word_completion: true
+  spelling_hints: 64
+  always_show_comments: true
+  initial_quality: 1.2
+  comment_format:
+  - xform/([jqxy])v/$1u/
+  - xform/([nl])v/$1ü/
+custom_phrase:
+  dictionary: ''
+  user_dict: personal_phrase_t9
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 99
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  inherit_comment: false
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json
+  tips: none
+punctuator:
+  import_preset: default
+recognizer:
+  patterns: {}
+key_binder:
+  bindings:
+  - when: has_menu
+    accept: '1'
+    send: apostrophe
+  - when: always
+    accept: Control+Shift+1
+    select: rime_ice
+  - when: has_menu
+    accept: Tab
+    send: Page_Down
+menu:
+  page_size: 7

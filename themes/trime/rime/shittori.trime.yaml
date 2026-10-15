@@ -1,0 +1,1907 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Trime 3.3.12 / Shittori compact. Native toolbar; no modified APK.
+style:
+  auto_caps: false
+  candidate_font: []
+  candidate_padding: 8
+  candidate_spacing: 0
+  candidate_text_size: 17
+  candidate_text_vertical_bias: 1.0
+  candidate_view_height: 34
+  comment_font: []
+  comment_height: 12
+  comment_position: top
+  comment_vertical_bias: 0.0
+  comment_text_size: 9
+  hanb_font: []
+  horizontal_gap: 4
+  keyboard_padding: 6
+  keyboard_padding_left: 0
+  keyboard_padding_right: 40
+  keyboard_padding_bottom: 4
+  keyboard_padding_land: 28
+  keyboard_padding_land_bottom: 4
+  key_font: []
+  key_height: 56
+  key_long_text_size: 14
+  key_text_size: 17
+  key_width: 10
+  label_text_size: 11
+  label_font:
+  - JetBrainsMono-Regular.ttf
+  latin_font: []
+  keyboard_height: 224
+  keyboard_height_land: 176
+  preview_font: []
+  preview_height: 60
+  preview_offset: -12
+  preview_text_size: 40
+  reset_ascii_mode_on_focus_change: false
+  round_corner: 12
+  shadow_radius: 0
+  symbol_font: []
+  symbol_text_size: 8
+  text_font: []
+  vertical_gap: 5
+  enter_label_mode: 0
+  enter_labels:
+    go: 前往
+    done: 完成
+    next: 下个
+    pre: 上个
+    search: 搜索
+    send: 发送
+    default: 换行
+  candidate_corner_radius: 9
+fallback_colors:
+  candidate_text_color: text_color
+preset_keys:
+  BRIGHTNESS_DOWN:
+    label: 亮度-
+    send: BRIGHTNESS_DOWN
+  BRIGHTNESS_UP:
+    label: 亮度+
+    send: BRIGHTNESS_UP
+  CALCULATOR:
+    label: 計算機
+    send: CALCULATOR
+  CALENDAR:
+    label: 日曆
+    send: CALENDAR
+  CONTACTS:
+    label: 電話簿
+    send: CONTACTS
+  ENVELOPE:
+    label: 信箱
+    send: ENVELOPE
+  EXPLORER:
+    label: 瀏覽器
+    send: EXPLORER
+  MUSIC:
+    label: 音樂
+    send: MUSIC
+  POWER:
+    label: 電源
+    send: POWER
+  SEARCH:
+    label: 搜尋
+    send: SEARCH
+  SLEEP:
+    label: 休眠
+    send: SLEEP
+  VOICE_ASSIST:
+    label: 語音
+    send: VOICE_ASSIST
+  VOLUME_DOWN:
+    label: 音量-
+    send: VOLUME_DOWN
+  VOLUME_UP:
+    label: 音量+
+    send: VOLUME_UP
+  VOLUME_MUTE:
+    label: 靜音
+    send: VOLUME_MUTE
+  Shift_L:
+    label: Shift
+    send: Shift_L
+    shift_lock: ascii_long
+  Return:
+    label: enter_labels
+    send: Return
+  Return1:
+    label: Enter
+    send: Return
+  Return2:
+    label: 回车
+    send: Return
+  Hide:
+    label: 隱藏
+    send: BACK
+  BackSpace:
+    label: ⌫
+    repeatable: true
+    send: BackSpace
+  space:
+    repeatable: false
+    functional: false
+    send: space
+  space1:
+    label: 空格
+    repeatable: false
+    functional: false
+    send: space
+  Escape:
+    label: Esc
+    send: Escape
+  Home:
+    label: 行首
+    send: Home
+  Insert:
+    label: 插入
+    send: Insert
+  Delete:
+    label: 刪除
+    send: Delete
+  End:
+    label: 行尾
+    send: End
+  Page_Up:
+    label: 上頁
+    send: Page_Up
+  Page_Down:
+    label: 下頁
+    send: Page_Down
+  Left:
+    label: ←
+    send: Left
+    repeatable: true
+  Down:
+    label: ↓
+    send: Down
+    repeatable: true
+  Up:
+    label: ↑
+    send: Up
+    repeatable: true
+  Right:
+    label: →
+    send: Right
+    repeatable: true
+  select_all:
+    label: 全选
+    send: Control+a
+  Clear:
+    label: 清除
+    text: '{Control+a}{BackSpace}'
+  cut:
+    label: 剪切
+    send: Control+x
+  cut_all:
+    label: 全挪
+    text: '{Control+a}{Control+x}'
+  copy:
+    label: 复制
+    send: Control+c
+  copy_all:
+    label: 全謄
+    text: '{Control+a}{Control+c}'
+  paste:
+    label: 粘贴
+    send: Control+v
+  paste_text:
+    label: 貼上文本
+    send: Control+Shift+Alt+v
+  share_text:
+    label: 分享文本
+    send: Control+Alt+s
+  redo:
+    label: 重做
+    send: Control+Shift+z
+  undo:
+    label: 撤销
+    send: Control+z
+  F4:
+    label: 方案選單
+    send: F4
+  BackToPreviousSyllable:
+    label: 刪音節
+    send: Control+BackSpace
+  CommitRawInput:
+    label: 編碼
+    send: Control+Return
+  CommitScriptText:
+    label: 編碼
+    send: Shift+Return
+  CommitComment:
+    label: 編碼
+    send: Control+Shift+Return
+  DeleteCandidate:
+    label: 刪詞
+    send: Control+Delete
+  Mode_switch:
+    toggle: ascii_mode
+    send: SWITCH_CHARSET
+    states:
+    - 中文
+    - 西文
+  Zenkaku_Hankaku:
+    toggle: full_shape
+    send: SWITCH_CHARSET
+    states:
+    - 半角
+    - 全角
+  Henkan:
+    toggle: simplification
+    send: SWITCH_CHARSET
+    states:
+    - 漢字
+    - 汉字
+  Charset_switch:
+    toggle: extended_charset
+    send: SWITCH_CHARSET
+    states:
+    - 常用
+    - 增廣
+  Punct_switch:
+    toggle: ascii_punct
+    send: SWITCH_CHARSET
+    states:
+    - 。，
+    - ．，
+  Keyboard_symbols:
+    label: 符號
+    send: Eisu_toggle
+    select: symbols
+  Keyboard_number:
+    label: 數字
+    send: Eisu_toggle
+    select: number
+  Keyboard_mini:
+    label: 迷你
+    send: Eisu_toggle
+    select: mini
+  Keyboard_letter:
+    label: 字母
+    send: Eisu_toggle
+    select: default
+  Keyboard_default:
+    label: 返回
+    send: Eisu_toggle
+    select: .default
+  Keyboard_switch:
+    label: 鍵盤
+    send: Eisu_toggle
+    select: .next
+  liquid_keyboard_switch:
+    label: 更多
+    send: FUNCTION
+    command: liquid_keyboard
+    option: 更多
+  liquid_keyboard_exit:
+    label: 返回
+    send: FUNCTION
+    command: liquid_keyboard
+    option: '-1'
+  liquid_keyboard_emoji:
+    label: 🙂
+    send: FUNCTION
+    command: liquid_keyboard
+    option: emoji
+  clipboard_window:
+    label: 剪贴
+    send: FUNCTION
+    command: clipboard_window
+    option: '0'
+  set_color_ink:
+    label: 切换到ink配色
+    send: FUNCTION
+    command: set_color_scheme
+    option: ink
+  set_theme_ink:
+    label: 切换到ink主题
+    send: FUNCTION
+    command: set_theme
+    option: ink
+  IME_switch:
+    label: 🌐
+    send: LANGUAGE_SWITCH
+  IME_last:
+    label: 上一輸入法
+    send: LANGUAGE_SWITCH
+    select: .last
+  IME_next:
+    label: 下一輸入法
+    send: LANGUAGE_SWITCH
+    select: .next
+  Schema_switch:
+    label: 下一方案
+    send: Control+Shift+1
+  one_hand_switch_1:
+    toggle: _one_hand_mode_1
+    send: SWITCH_CHARSET
+    states:
+    - 左手
+    - 普通
+  one_hand_switch_2:
+    toggle: _one_hand_mode_2
+    send: SWITCH_CHARSET
+    states:
+    - 右手
+    - 普通
+  one_hand_switch_3:
+    toggle: _one_hand_mode_3
+    send: SWITCH_CHARSET
+    states:
+    - 左手
+    - 右手
+  Color_switch:
+    label: 配色
+    send: PROG_RED
+  Help:
+    label: 說明
+    send: HELP
+  Info:
+    label: 關於
+    send: INFO
+  Menu:
+    label: 方案
+    send: MENU
+  Settings:
+    label: 設定
+    send: SETTINGS
+  Color_settings:
+    label: 配色
+    send: SETTINGS
+    option: color
+  Theme_settings:
+    label: 主題
+    send: SETTINGS
+    option: theme
+  Schema_settings:
+    label: 方案
+    send: SETTINGS
+    option: schema
+  Candidate_switch:
+    toggle: _hide_candidate
+    send: SWITCH_CHARSET
+    states:
+    - 有候選
+    - 無候選
+  Comment_switch:
+    toggle: _hide_comment
+    send: SWITCH_CHARSET
+    states:
+    - 有註釋
+    - 無註釋
+  Hint_switch:
+    toggle: _hide_key_hint
+    send: SWITCH_CHARSET
+    states:
+    - 有助記
+    - 無助記
+  Date:
+    label: 日期
+    command: date
+    option: yyyy-MM-dd
+  ChineseDate:
+    label: 農曆
+    command: date
+    option: zh_CN@calendar=chinese
+  Time:
+    label: 時間
+    command: date
+    option: HH:mm:ss
+  TrimeApp:
+    label: 同文
+    command: run
+    option: com.osfans.trime
+  TrimeCmp:
+    label: 同文組件
+    command: run
+    option: com.osfans.trime/.ui.main.MainActivity
+  Homepage:
+    label: 同文主頁
+    command: run
+    option: https://github.com/osfans/trime
+  CommitHomepage:
+    label: 同文網址
+    commit: https://github.com/osfans/trime
+  Wiki:
+    label: 維基
+    command: run
+    option: https://zh.wikipedia.org/wiki/%s
+  Google:
+    label: 谷歌
+    command: run
+    option: https://www.google.com/search?q=%s
+  MoeDict:
+    label: 萌典
+    command: run
+    option: https://www.moedict.tw/%3$s
+  Baidu:
+    label: 百度搜索
+    command: run
+    option: https://www.baidu.com/s?wd=%4$s
+  Zdic:
+    label: 漢典
+    command: run
+    option: http://www.zdic.net/sousuo/?q=%1$s
+  Zdic2:
+    label: 漢典
+    command: run
+    option: http://www.zdic.net/sousuo/?q=%2$s
+  WebSearch:
+    label: 搜索網頁
+    command: web_search
+    option: '%4$s'
+  Search:
+    label: 搜索
+    command: search
+    option: '%1$s'
+  Share:
+    label: 分享
+    command: send
+    option: '%s'
+  Deploy:
+    label: 部署
+    send: FUNCTION
+    command: apply
+    option: DEPLOY
+  Sync:
+    label: 同步
+    send: FUNCTION
+    command: apply
+    option: SYNC_USER_DATA
+  updateConfig:
+    label: 更新配置
+    send: FUNCTION
+    command: apply
+    option: UPDATE_CONFIG
+  RepeatCommit:
+    label: 重复
+    command: commit
+    option: '%1$s'
+  Space:
+    label: 空格
+    send: space
+    functional: false
+  SwitchLayout:
+    label: 26键
+    send: Control+Shift+1
+  SwitchT9:
+    label: 九宫
+    send: Control+Shift+1
+  English:
+    label: ABC
+    send: Eisu_toggle
+    select: english
+  Numbers:
+    label: '123'
+    send: Eisu_toggle
+    select: number
+  Symbols:
+    label: 符号
+    send: Eisu_toggle
+    select: symbols
+  Chinese:
+    label: 中文
+    send: Eisu_toggle
+    select: .default
+  Split:
+    label: 分词
+    send: apostrophe
+  ClearInput:
+    label: 清空
+    send: Escape
+  Emoji:
+    label: 表情
+    send: FUNCTION
+    command: liquid_keyboard
+    option: emoji
+  More:
+    label: 方案
+    send: MENU
+  Punc0:
+    label: ，
+    commit: ，
+  Punc1:
+    label: 。
+    commit: 。
+  Punc2:
+    label: ？
+    commit: ？
+  Punc3:
+    label: ！
+    commit: ！
+  Punc4:
+    label: 、
+    commit: 、
+  Punc5:
+    label: ；
+    commit: ；
+  Punc6:
+    label: ：
+    commit: ：
+  Punc7:
+    label: …
+    commit: …
+  Punc8:
+    label: （
+    commit: （
+  Punc9:
+    label: ）
+    commit: ）
+  Punc10:
+    label: 「
+    commit: 「
+  Punc11:
+    label: 」
+    commit: 」
+  Punc12:
+    label: '@'
+    commit: '@'
+  Punc13:
+    label: '#'
+    commit: '#'
+  Punc14:
+    label: '%'
+    commit: '%'
+  Punc15:
+    label: '&'
+    commit: '&'
+  Punc16:
+    label: +
+    commit: +
+  Punc17:
+    label: '-'
+    commit: '-'
+  Punc18:
+    label: '='
+    commit: '='
+  Punc19:
+    label: /
+    commit: /
+  Clipboard:
+    label: 剪贴板
+    send: FUNCTION
+    command: clipboard_window
+    option: '0'
+  Editor:
+    label: 编辑
+    send: Eisu_toggle
+    select: editor
+  Tools:
+    label: 设置
+    send: FUNCTION
+    command: menu_keyboard
+  SelectLeft:
+    label: 选左
+    send: Shift+Left
+    repeatable: true
+  SelectRight:
+    label: 选右
+    send: Shift+Right
+    repeatable: true
+  Digit0:
+    label: '0'
+    commit: '0'
+    functional: false
+  Digit1:
+    label: '1'
+    commit: '1'
+    functional: false
+  Digit2:
+    label: '2'
+    commit: '2'
+    functional: false
+  Digit3:
+    label: '3'
+    commit: '3'
+    functional: false
+  Digit4:
+    label: '4'
+    commit: '4'
+    functional: false
+  Digit5:
+    label: '5'
+    commit: '5'
+    functional: false
+  Digit6:
+    label: '6'
+    commit: '6'
+    functional: false
+  Digit7:
+    label: '7'
+    commit: '7'
+    functional: false
+  Digit8:
+    label: '8'
+    commit: '8'
+    functional: false
+  Digit9:
+    label: '9'
+    commit: '9'
+    functional: false
+  T9_2:
+    label: ABC
+    send: '2'
+    preview: ABC
+    functional: false
+  T9_3:
+    label: DEF
+    send: '3'
+    preview: DEF
+    functional: false
+  T9_4:
+    label: GHI
+    send: '4'
+    preview: GHI
+    functional: false
+  T9_5:
+    label: JKL
+    send: '5'
+    preview: JKL
+    functional: false
+  T9_6:
+    label: MNO
+    send: '6'
+    preview: MNO
+    functional: false
+  T9_7:
+    label: PQRS
+    send: '7'
+    preview: PQRS
+    functional: false
+  T9_8:
+    label: TUV
+    send: '8'
+    preview: TUV
+    functional: false
+  T9_9:
+    label: WXYZ
+    send: '9'
+    preview: WXYZ
+    functional: false
+liquid_keyboard:
+  author: tumuyan
+  row: 6
+  row_land: 5
+  key_height: 40
+  key_height_land: 40
+  single_width: 60
+  vertical_gap: 1
+  margin_x: 5
+  fixed_key_bar:
+    position: bottom
+    keys:
+    - liquid_keyboard_exit
+    - space1
+    - BackSpace
+    - Return2
+    - clipboard_window
+    - liquid_keyboard_switch
+  keyboards:
+  - emoji
+  - math
+  - ascii
+  - cn
+  - history
+  - symbollist
+  - list
+  - ids
+  - symbol
+  - tabs
+  - pinyin
+  - script_symbols
+  - jp
+  - grease
+  - rusa
+  - korea
+  - lation
+  - yinbiao
+  - unit
+  - yanwenzi
+  - combing
+  - emoji_full
+  tabs:
+    name: 更多
+    type: TABS
+  history:
+    name: 常用
+    type: HISTORY
+  emoji:
+    type: SINGLE
+    keys: 🙂😂🤣😆🙃😅🥺😎👀🙈🙉🙊☹😑😄🤐😨😱🌚🌝🤔❤💔🌹💣👌👍😣😥😮🙄😏😕😯😪😫😴😌🤑😉😋😎😍😘😚😛😜😝😒😓😔😲😷🤒😇🤓🤗🤕🙁😖😞😟😤😢😭😦😧😨😩😬😰😳😵😡😠☝✌🖕👎🙏🤘👏💪💋☘🍀🌸☕🍵🍺🍻🍦🍬🍚🍜🍲🍖🎂💤
+  emoji_full:
+    type: SINGLE
+    name: 全emoji
+    keys: 😀😃😄😁😆😅🤣😂🙂🙃🫠😉😊😇🥰😍🤩😘😗☺😚😙🥲😋😛😜🤪😝🤑🤗🤭🫢🫣🤫🤔🫡🤐🤨😐😑😶🫥😏😒🙄😬🤥😌😔😪🤤😴😷🤒🤕🤢🤮🤧🥵🥶🥴😵🤯🤠🥳🥸😎🤓🧐😕🫤😟🙁☹😮😯😲😳🥺🥹😦😧😨😰😥😢😭😱😖😣😞😓😩😫🥱😤😡😠🤬😈👿💀☠💩🤡👹👺👻👽👾🤖😺😸😹😻😼😽🙀😿😾🙈🙉🙊💌💘💝💖💗💓💞💕💟❣💔❤🧡💛💚💙💜🤎🖤🤍💋💯💢💥💫💦💨🕳💬🗨🗯💭💤👋🤚🖐✋🖖🫱🫲🫳🫴👌🤌🤏✌🤞🫰🤟🤘🤙👈👉👆🖕👇☝🫵👍👎✊👊🤛🤜👏🙌🫶👐🤲🤝🙏✍💅🤳💪🦾🦿🦵🦶👂🦻👃🧠🫀🫁🦷🦴👀👁👅👄🫦👶🧒👦👧🧑👱👨🧔👩🧓👴👵🙍🙎🙅🙆💁🙋🧏🙇🤦🤷👮🕵💂🥷👷🫅🤴👸👳👲🧕🤵👰🤰🫃🫄🤱👼🎅🤶🦸🦹🧙🧚🧛🧜🧝🧞🧟🧌💆💇🚶🧍🧎🏃💃🕺🕴👯🧖🧗🤺🏇⛷🏂🏌🏄🚣🏊⛹🏋🚴🚵🤸🤼🤽🤾🤹🧘🛀🛌👭👫👬💏💑👪🗣👤👥🫂👣🏻🏼🏽🏾🏿🦰🦱🦳🦲🐵🐒🦍🦧🐶🐕🦮🐩🐺🦊🦝🐱🐈🦁🐯🐅🐆🐴🐎🦄🦓🦌🦬🐮🐂🐃🐄🐷🐖🐗🐽🐏🐑🐐🐪🐫🦙🦒🐘🦣🦏🦛🐭🐁🐀🐹🐰🐇🐿🦫🦔🦇🐻🐨🐼🦥🦦🦨🦘🦡🐾🦃🐔🐓🐣🐤🐥🐦🐧🕊🦅🦆🦢🦉🦤🪶🦩🦚🦜🐸🐊🐢🦎🐍🐲🐉🦕🦖🐳🐋🐬🦭🐟🐠🐡🦈🐙🐚🪸🐌🦋🐛🐜🐝🪲🐞🦗🪳🕷🕸🦂🦟🪰🪱🦠💐🌸💮🪷🏵🌹🥀🌺🌻🌼🌷🌱🪴🌲🌳🌴🌵🌾🌿☘🍀🍁🍂🍃🪹🪺🍄🍇🍈🍉🍊🍋🍌🍍🥭🍎🍏🍐🍑🍒🍓🫐🥝🍅🫒🥥🥑🍆🥔🥕🌽🌶🫑🥒🥬🥦🧄🧅🥜🫘🌰🍞🥐🥖🫓🥨🥯🥞🧇🧀🍖🍗🥩🥓🍔🍟🍕🌭🥪🌮🌯🫔🥙🧆🥚🍳🥘🍲🫕🥣🥗🍿🧈🧂🥫🍱🍘🍙🍚🍛🍜🍝🍠🍢🍣🍤🍥🥮🍡🥟🥠🥡🦀🦞🦐🦑🦪🍦🍧🍨🍩🍪🎂🍰🧁🥧🍫🍬🍭🍮🍯🍼🥛☕🫖🍵🍶🍾🍷🍸🍹🍺🍻🥂🥃🫗🥤🧋🧃🧉🧊🥢🍽🍴🥄🔪🫙🏺🌍🌎🌏🌐🗺🗾🧭🏔⛰🌋🗻🏕🏖🏜🏝🏞🏟🏛🏗🧱🪨🪵🛖🏘🏚🏠🏡🏢🏣🏤🏥🏦🏨🏩🏪🏫🏬🏭🏯🏰💒🗼🗽⛪🕌🛕🕍⛩🕋⛲⛺🌁🌃🏙🌄🌅🌆🌇🌉♨🎠🛝🎡🎢💈🎪🚂🚃🚄🚅🚆🚇🚈🚉🚊🚝🚞🚋🚌🚍🚎🚐🚑🚒🚓🚔🚕🚖🚗🚘🚙🛻🚚🚛🚜🏎🏍🛵🦽🦼🛺🚲🛴🛹🛼🚏🛣🛤🛢⛽🛞🚨🚥🚦🛑🚧⚓🛟⛵🛶🚤🛳⛴🛥🚢✈🛩🛫🛬🪂💺🚁🚟🚠🚡🛰🚀🛸🛎🧳⌛⏳⌚⏰⏱⏲🕰🕛🕧🕐🕜🕑🕝🕒🕞🕓🕟🕔🕠🕕🕡🕖🕢🕗🕣🕘🕤🕙🕥🕚🕦🌑🌒🌓🌔🌕🌖🌗🌘🌙🌚🌛🌜🌡☀🌝🌞🪐⭐🌟🌠🌌☁⛅⛈🌤🌥🌦🌧🌨🌩🌪🌫🌬🌀🌈🌂☂☔⛱⚡❄☃⛄☄🔥💧🌊🎃🎄🎆🎇🧨✨🎈🎉🎊🎋🎍🎎🎏🎐🎑🧧🎀🎁🎗🎟🎫🎖🏆🏅🥇🥈🥉⚽⚾🥎🏀🏐🏈🏉🎾🥏🎳🏏🏑🏒🥍🏓🏸🥊🥋🥅⛳⛸🎣🤿🎽🎿🛷🥌🎯🪀🪁🎱🔮🪄🎮🕹🎰🎲🧩🧸🪅🪩🪆♠♥♦♣♟🃏🀄🎴🔫🎭🖼🎨🧵🪡🧶🪢👓🕶🥽🥼🦺👔👕👖🧣🧤🧥🧦👗👘🥻🩱🩲🩳👙👚👛👜👝🛍🎒🩴👞👟🥾🥿👠👡🩰👢👑👒🎩🎓🧢🪖⛑📿💄💍💎🔇🔈🔉🔊📢📣📯🔔🔕🎼🎵🎶🎙🎚🎛🎤🎧📻🎷🪗🎸🎹🎺🎻🪕🥁🪘📱📲☎📞📟📠🔋🪫🔌💻🖥🖨⌨🖱🖲💽💾💿📀🧮🎥🎞📽🎬📺📷📸📹📼🔍🔎🕯💡🔦🏮🪔📔📕📖📗📘📙📚📓📒📃📜📄📰🗞📑🔖🏷💰🪙💴💵💶💷💸💳🧾💹✉📧📨📩📤📥📦📫📪📬📭📮🗳✏✒🖋🖊🖌🖍📝💼📁📂🗂📅📆🗒🗓📇📈📉📊📋📌📍📎🖇📏📐✂🗃🗄🗑🔒🔓🔏🔐🔑🗝💣🔨🪓⛏⚒🛠🗡⚔🪃🏹🛡🪚🔧🪛🔩⚙🗜⚖🦯🔗⛓🪝🧰🧲🪜⚗🧪🧫🧬🔬🔭📡💉🩸💊🩹🩼🩺🩻🚪🛗🪞🪟🛏🛋🪑🚽🪠🚿🛁🪤🪒🧴🧷🧹🧺🧻🪣🧼🫧🪥🧽🧯🛒🧿🪬🚬⚰🪦⚱🗿🪧🪪🏧🚮🚰♿🚹🚺🚻🚼🚾🛂🛃🛄🛅⚠🚸⛔🚫🚳🚭🚯🚱🚷📵🔞☢☣⬆↗➡↘⬇↙⬅↖↕↔↩↪⤴⤵🔃🔄🔙🔚🔛🔜🔝🛐⚛🕉✡☸☯✝☦☪☮🕎🔯♈♉♊♋♌♍♎♏♐♑♒♓⛎🔀🔁🔂▶⏩⏭⏯◀⏪⏮🔼⏫🔽⏬⏸⏹⏺⏏🎦🔅🔆📶📳📴♀♂⚧✖➕➖➗🟰♾‼⁉❓❔❕❗〰💱💲⚕♻⚜🔱📛🔰⭕✅☑✔❌❎➰➿〽✳✴❇©®™🔟🔠🔡🔢🔣🔤🅰🆎🅱🆑🆒🆓ℹ🆔Ⓜ🆕🆖🅾🆗🅿🆘🆙🆚🈁🈂🈷🈶🈯🉐🈹🈚🈲🉑🈸🈴🈳㊗㊙🈺🈵🔴🟠🟡🟢🔵🟣🟤⚫⚪🟥🟧🟨🟩🟦🟪🟫⬛⬜◼◻◾◽▪▫🔶🔷🔸🔹🔺🔻💠🔘🔳🔲🏁🚩🎌🏴🏳
+  math:
+    type: SINGLE
+    name: 数学
+    keys: ≈＝≠≌<>≤≥≡()[]{}-+±×*/÷&∥%‰‱°′″∫∮∯∬∭∰∞∑∧∏∈∵∴⊥∝∨∪•√〒∝∽∈∩∧⊙⌒∥∟∣∂∆∞≌∉∪∨⊕⊿⊥∠∫∬∭
+  cn:
+    type: SINGLE
+    name: 中文
+    keys:
+    - ，
+    - 。
+    - ？
+    - ！
+    - ：
+    - 、
+    - “
+    - ”
+    - ‘
+    - ···
+    - ……
+    - click: '-'
+    - click: ——
+      label: 破折
+    - click: ''
+    - （
+    - ）
+    - 【
+    - 】
+    - 《
+    - 》
+    - ［
+    - ］
+    - ｛
+    - ｝
+    - 「
+    - 」
+    - 『
+    - 』
+    - ～
+  symbol:
+    name: 特殊
+    type: SINGLE
+    keys: △▽○◇□☆▲▼●◆■★▷◁▶◀♻♲†⚝✡⚹✦✸✹￼�×⌫☑☒✅❎✔✘✓✗☀☼☽☾◑◐㏂㏘☭♀♂☹☻☠☜☝☞☚☟☛▪•‥…∷※♩♪♫♬§°♭♯♮‖¶№◎¤۞℗®©卍卐℡™㏇Φ⇦⇧⇨⇩⇪↖↑↗←↔→↙↓↘⇄⇅⇆⇤↩⇥▸◂▴▾◤◥◣◢㊤㊧㊥㊨㊦❏❐◲〼▢▣↶✁↷✍⏍ϟ📝✎✆☱☰☴⚿⛮⚙☲☯☵⛶☩☐☳☷☶💬🗨⟲ღ✈☂🎤🌐🔍
+  unit:
+    name: 单位
+    type: SINGLE
+    keys: ℃¥$€฿￡㎡m³℉￥£￠₠¹²³⁴⁵ⁿ⁶⁷⁸⁹⁰ˣ⁺⁻⁼⁽⁾½⅓¼⅔¾₁₂₃₄₅ₙ₆₇₈₉₀ₓ₊₋₌₍₎℅
+  list:
+    name: 列表
+    type: SINGLE
+    keys: ①②③④⑤⑥⑦⑧⑨⑩⒈⒉⒊⒋⒌⒍⒎⒏⒐⒑⒒⒓⒔⒕⒖⒗⒘⒙⒚⒛⑴⑵⑶⑷⑸⑹⑺⑻⑼⑽⑾⑿⒀⒁⒂⒃⒄⒅⒆⒇㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩➊➋➌➍➎➏➐➑➒➓㊀㊁㊂㊃㊄㊅㊆㊇㊈㊉ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ
+  pinyin:
+    name: 拼音
+    type: SINGLE
+    keys: āáǎàōóēéěèǒòīíǐìūúǖǘǚǜǔùêüńňㄚㄛㄜㄧㄨㄩㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ
+  script_symbols:
+    name: 𝒶𝒜
+    type: SINGLE
+    keys: 𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵
+  grease:
+    type: SINGLE
+    name: 希腊
+    keys: ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω
+  rusa:
+    name: 俄语
+    type: SINGLE
+    keys: АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя
+  lation:
+    name: 拉丁
+    type: SINGLE
+    keys: ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŠŸŒàáâãäåæçèéêëìíîïðñòóõôöøùúûüýþšÿœ
+  korea:
+    type: SINGLE
+    name: 韩文
+    keys: dㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖㅘㅙㅚㅝㅞㅟㅢㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㄲㄸㅚㅆㅉ㉠㉡㉢㉣㉤㉥㉦㉧㉨㉩㉪㉫㉬㉭㉮㉯㉰㉱㉲㉳㉴㉵㉶㉷㉸㉹㉺㉻㈀㈁㈂㈃㈄㈅㈆㈇㈈㈉㈊㈋㈌㈍㈎㈏㈐㈑㈒㈓㈔㈕㈖㈗㈘㈙㈚㈛
+  yinbiao:
+    type: SINGLE
+    name: 音标
+    keys:
+    - 'a:'
+    - 'ɔ:'
+    - ɜː
+    - 'i:'
+    - 'u:'
+    - ʌ
+    - ɒ
+    - ə
+    - ɪ
+    - ʊ
+    - e
+    - æ
+    - eɪ
+    - aɪ
+    - ɔɪ
+    - ɪə
+    - eə
+    - ʊə
+    - əʊ
+    - aʊ
+    - p
+    - t
+    - k
+    - f
+    - θ
+    - s
+    - b
+    - d
+    - g
+    - v
+    - ð
+    - z
+    - ʃ
+    - h
+    - ts
+    - tʃ
+    - j
+    - tr
+    - ʒ
+    - r
+    - dz
+    - dʒ
+    - dr
+    - w
+    - m
+    - n
+    - ŋ
+    - l
+  yanwenzi:
+    type: SINGLE
+    name: 颜文字
+    keys:
+    - ⎛⎝≥⏝⏝≤⎠⎞
+    - ^_^
+    - ^ω^
+    - ^o^
+    - ~\(≧▽≦)/~
+    - '*^_^*'
+    - ↖(^ω^)↗
+    - (^o^)／
+    - (=^▽^=)
+    - =^_^=
+    - (*^ω^*)
+    - ٩(๑^o^๑)۶
+    - o(￣▽￣)o
+    - Y(^_^)Y
+    - ٩( 'ω' )و
+    - ╰(*´︶`*)╯
+    - '*罒▽罒*'
+    - ヾ ^_^♪
+    - =￣ω￣=
+    - ︿(￣︶￣)︿
+    - (´▽｀)ノ♪
+    - 乁( ˙ ω˙乁)
+    - ✧*｡٩(ˊωˋ*)و✧*｡
+    - ～(￣▽￣～)(～￣▽￣)～
+    - QwQ
+    - (●—●)
+    - (๑• . •๑)
+    - ヾ(≧O≦)〃嗷~
+    - 罒ω罒
+    - (｡ì _ í｡)
+    - (๑•ี_เ•ี๑)
+    - ㄟ(≧◇≦)ㄏ
+    - (*/ω＼*)
+    - ●▽●
+    - ٩(๑òωó๑)۶
+    - ✺◟(∗❛ัᴗ❛ั∗)◞✺
+    - ( σ'ω')σ
+    - ♡＾▽＾♡
+    - (๑•̀ㅂ•́)و✧
+    - (ง •̀_•́)ง
+    - (｡･ω･｡)ﾉ♡
+    - (☆_☆)
+    - (๑°3°๑)
+    - _(•̀ω•́ 」∠)_
+    - ♪～(´ε｀　)
+    - ～(^з^)-☆
+    - (´∀｀)♡
+    - ლ(´ڡ`ლ)
+    - (＞﹏＜)
+    - T_T
+    - ⊙︿⊙
+    - 〒▽〒
+    - ⊙﹏⊙
+    - π_π
+    - (｡•́︿•̀｡)
+    - (ToT)/~~~
+    - ╯﹏╰
+    - ಥ_ಥ
+    - (╥╯^╰╥)
+    - (〃′o`)
+    - ●﹏●
+    - ( •̥́ ˍ •̀ू )
+    - (つд⊂)
+    - 心塞(´-ωก`)
+    - (╥﹏╥)
+    - ┭┮﹏┭┮
+    - （；´д｀）ゞ
+    - (´;︵;`)
+    - (。﹏。)
+    - ┗( T﹏T )┛
+    - QAQ
+    - ヘ(_ _ヘ)
+    - ╰（‵□′）╯
+    - (*￣︿￣)
+    - '>o<'
+    - (-`ェ´-怒)
+    - ヽ(‘⌒´メ)ノ
+    - (*｀Ω´*)v
+    - (｡•ˇ‸ˇ•｡)
+    - (怒｀Д´怒)
+    - ٩(๑`^´๑)۶
+    - (;｀O´)o
+    - ╰_╯
+    - (#｀皿´)<怒怒怒!!!
+    - <(｀^´)>
+    - （｀Δ´）！
+    - ψ(｀∇´)ψ
+    - (；′⌒`)
+    - s(・｀ヘ´・;)ゞ
+    - (▼皿▼#)
+    - ￣へ￣
+    - ←_←
+    - （╯‵□′）╯︵┴─┴
+    - （▼へ▼メ）
+    - ☄ฺ(◣д◢)☄ฺ
+    - →_→
+    - ⊙_⊙
+    - d(ŐдŐ๑)
+    - Σ( ° △ °|||)︴
+    - (((φ(◎ロ◎;)φ)))
+    - ⊙▽⊙
+    - (๑ŐдŐ)b
+    - ╭(°A°`)╮
+    - (๑òᆺó๑)
+    - ⊙ω⊙
+    - Σ(っ °Д °;)っ
+    - ' (ﾟДﾟ≡ﾟдﾟ)!?'
+    - ( *・ω・)✄╰ひ╯
+    - (⊙x⊙;)
+    - ┌(。Д。)┐
+    - (°ー°〃)
+    - ︽⊙_⊙︽
+    - '!!!∑(°Д°ノ)ノ'
+    - (๑ŐдŐ)b☆d(ŐдŐ๑)
+    - Σ⊙▃⊙川
+    - ヽ(*。>Д<)o゜
+    - ━((*′д｀)爻(′д｀*))━!!!!
+    - =_=
+    - ╮(╯_╰)╭
+    - （︶︿︶）
+    - _(:з」∠)_
+    - '@_@'
+    - ╮(╯▽╰)╭
+    - (＠￣ー￣＠)
+    - _(:3」∠❀)_
+    - 눈_눈
+    - ╭(╯ε╰)╮
+    - (ー_ー)!!
+    - _(:D)∠)_
+    - o_O
+    - ╭(╯^╰)╮
+    - (；一_一)
+    - ´_>`
+    - -_-#
+    - ┑(￣Д ￣)┍
+    - ≡￣﹏￣≡
+    - ○|￣|_
+    - -_-||
+    - ㄟ( ▔, ▔ )ㄏ
+    - ( ＿ ＿)ノ｜壁
+    - ▄█▀█●
+  combing:
+    type: SINGLE
+    name: 组合
+    keys:
+    - ⃢
+    - ꯭
+    - ̣
+    - ̲
+  ascii:
+    type: SINGLE
+    name: 英文
+    keys: ',.?!:;/\|*-+=$`''"^~@#%&()[]{}_'
+  ids:
+    type: SINGLE
+    name: IDS
+    keys: ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻↷↔
+  jp:
+    type: SINGLE
+    name: 假名
+    keys: あいうえおかがきぎくぐけげこごさざしじすずせぜそぞただちぢつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろわをんアィイウェエオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロワヲン
+  symbollist:
+    type: SYMBOL
+    name: 符号表
+    keys:
+    - 符号: /fh
+    - 电脑: /dn
+    - 象棋: /xq
+    - 麻将: /mj
+    - 骰子: /sz
+    - 扑克: /pk
+    - 天气: /tq
+    - 音乐: /yy
+    - 八卦: /bg
+    - 易经: /lssg
+    - 天体: /tt
+    - 星座: /xz
+    - 星号: /xh
+    - 方块: /fk
+    - 几何: /jh
+    - 箭头: /jt
+    - 数学: /sx
+    - 上标: /sb
+    - 下标: /xb
+    - 单位: /dw
+    - 货币: /hb
+    - 拼音: /py
+    - 注音: /zy
+    - 假名: /jm
+    - 片假: /pjm
+    - 韩文: /hw
+    - 希腊: /xl
+    - 希大: /xld
+    - 罗马: /lm
+    - 罗大: /lmd
+    - 俄语: /ey
+    - 俄大: /eyd
+    - 表情: /bq
+    - 一: /1
+    - 二: /2
+    - 三: /3
+    - 四: /4
+    - 五: /5
+    - 六: /6
+    - 七: /7
+    - 八: /8
+    - 九: /9
+    - 零: /0
+    - 十: /10
+    - 分数: /fs
+    - 标点: /bd
+    - 偏旁: /pp
+    - 竖标: /bdz
+config_version: 2.0.0
+name: Shittori · S25 九宫格
+author: lazypoems
+preedit:
+  horizontal_padding: 0
+  top_start_radius: 16
+  top_end_radius: 16
+  foreground:
+    font_size: 0
+  alpha: 0
+window:
+  corner_radius: 16
+  insets:
+    vertical: 6
+    horizontal: 6
+  foreground:
+    label_font_size: 11
+    text_font_size: 17
+    comment_font_size: 10
+preset_color_schemes:
+  default:
+    back_color: '#F9F6EF'
+    border_color: '#DDD6C8'
+    candidate_text_color: '#2B2926'
+    comment_text_color: '#6A655C'
+    hilited_back_color: '#D8DBCC'
+    hilited_candidate_back_color: '#D8DBCC'
+    hilited_candidate_label_color: '#42602D'
+    hilited_candidate_text_color: '#1C1B19'
+    hilited_comment_text_color: '#6A655C'
+    hilited_text_color: '#42602D'
+    label_color: '#6A655C'
+    preedit_back_color: '#F9F6EF'
+    text_color: '#6A655C'
+    name: Shittori · 自动浅深色
+    author: lazypoems
+    dark_scheme: shittori_ai
+    light_scheme: shittori_matsuba
+    keyboard_back_color: '#F9F6EF'
+    root_background: '#F9F6EF'
+    candidate_background: '#F9F6EF'
+    key_back_color: '#FFFCF6'
+    key_text_color: '#2B2926'
+    key_symbol_color: '#6A655C'
+    key_border_color: '#FFFCF6'
+    hilited_key_back_color: '#D8DBCC'
+    hilited_key_text_color: '#1C1B19'
+    hilited_key_symbol_color: '#42602D'
+    off_key_back_color: '#D8DBCC'
+    off_key_text_color: '#2B2926'
+    on_key_back_color: '#42602D'
+    on_key_text_color: '#F9F6EF'
+    hilited_label_color: '#42602D'
+    text_back_color: '#F9F6EF'
+    preview_back_color: '#FFFCF6'
+    preview_text_color: '#2B2926'
+    shadow_color: '#00000000'
+  shittori_matsuba:
+    back_color: '#F9F6EF'
+    border_color: '#DDD6C8'
+    candidate_text_color: '#2B2926'
+    comment_text_color: '#6A655C'
+    hilited_back_color: '#D8DBCC'
+    hilited_candidate_back_color: '#D8DBCC'
+    hilited_candidate_label_color: '#42602D'
+    hilited_candidate_text_color: '#1C1B19'
+    hilited_comment_text_color: '#6A655C'
+    hilited_text_color: '#42602D'
+    label_color: '#6A655C'
+    preedit_back_color: '#F9F6EF'
+    text_color: '#6A655C'
+    name: Shittori · 松叶
+    author: lazypoems
+    dark_scheme: shittori_ai
+    light_scheme: shittori_matsuba
+    keyboard_back_color: '#F9F6EF'
+    root_background: '#F9F6EF'
+    candidate_background: '#F9F6EF'
+    key_back_color: '#FFFCF6'
+    key_text_color: '#2B2926'
+    key_symbol_color: '#6A655C'
+    key_border_color: '#FFFCF6'
+    hilited_key_back_color: '#D8DBCC'
+    hilited_key_text_color: '#1C1B19'
+    hilited_key_symbol_color: '#42602D'
+    off_key_back_color: '#D8DBCC'
+    off_key_text_color: '#2B2926'
+    on_key_back_color: '#42602D'
+    on_key_text_color: '#F9F6EF'
+    hilited_label_color: '#42602D'
+    text_back_color: '#F9F6EF'
+    preview_back_color: '#FFFCF6'
+    preview_text_color: '#2B2926'
+    shadow_color: '#00000000'
+  shittori_ai:
+    back_color: '#1E2228'
+    border_color: '#3A424E'
+    candidate_text_color: '#C6CAD1'
+    comment_text_color: '#929BA8'
+    hilited_back_color: '#3B4856'
+    hilited_candidate_back_color: '#3B4856'
+    hilited_candidate_label_color: '#8FB3DA'
+    hilited_candidate_text_color: '#E4E7EB'
+    hilited_comment_text_color: '#929BA8'
+    hilited_text_color: '#8FB3DA'
+    label_color: '#929BA8'
+    preedit_back_color: '#1E2228'
+    text_color: '#929BA8'
+    name: Shittori · 蓝夜
+    author: lazypoems
+    dark_scheme: shittori_ai
+    light_scheme: shittori_matsuba
+    keyboard_back_color: '#1E2228'
+    root_background: '#1E2228'
+    candidate_background: '#1E2228'
+    key_back_color: '#29323B'
+    key_text_color: '#C6CAD1'
+    key_symbol_color: '#929BA8'
+    key_border_color: '#29323B'
+    hilited_key_back_color: '#3B4856'
+    hilited_key_text_color: '#E4E7EB'
+    hilited_key_symbol_color: '#8FB3DA'
+    off_key_back_color: '#3B4856'
+    off_key_text_color: '#C6CAD1'
+    on_key_back_color: '#8FB3DA'
+    on_key_text_color: '#1E2228'
+    hilited_label_color: '#8FB3DA'
+    text_back_color: '#1E2228'
+    preview_back_color: '#29323B'
+    preview_text_color: '#C6CAD1'
+    shadow_color: '#00000000'
+preset_keyboards:
+  default:
+    name: Shittori 九宫格
+    author: lazypoems
+    ascii_mode: 0
+    reset_ascii_mode: true
+    ascii_keyboard: english
+    width: 10
+    height: 56
+    lock: true
+    keys:
+    - click: ','
+      width: 15
+      label: ，
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: '?'
+      label_symbol: '?'
+      key_symbol_offset_x: 14
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: Split
+      width: 23.333333333333332
+      label: 分词
+      key_text_size: 17
+      long_click: Digit1
+      label_symbol: '1'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_2
+      width: 23.333333333333332
+      label: ABC
+      key_text_size: 17
+      long_click: Digit2
+      label_symbol: '2'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_3
+      width: 23.333333333333332
+      label: DEF
+      key_text_size: 17
+      long_click: Digit3
+      label_symbol: '3'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: BackSpace
+      width: 15
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: ClearInput
+      label_symbol: 清空
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: .
+      width: 15
+      label: 。
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: '!'
+      label_symbol: '!'
+      key_symbol_offset_x: 14
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: T9_4
+      width: 23.333333333333332
+      label: GHI
+      key_text_size: 17
+      long_click: Digit4
+      label_symbol: '4'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_5
+      width: 23.333333333333332
+      label: JKL
+      key_text_size: 17
+      long_click: Digit5
+      label_symbol: '5'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_6
+      width: 23.333333333333332
+      label: MNO
+      key_text_size: 17
+      long_click: Digit6
+      label_symbol: '6'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: Numbers
+      width: 15
+      key_text_size: 12
+      key_back_color: off_key_back_color
+    - click: Symbols
+      width: 15
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: Emoji
+      label_symbol: 表情
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: T9_7
+      width: 23.333333333333332
+      label: PQRS
+      key_text_size: 17
+      long_click: Digit7
+      label_symbol: '7'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_8
+      width: 23.333333333333332
+      label: TUV
+      key_text_size: 17
+      long_click: Digit8
+      label_symbol: '8'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: T9_9
+      width: 23.333333333333332
+      label: WXYZ
+      key_text_size: 17
+      long_click: Digit9
+      label_symbol: '9'
+      key_symbol_offset_x: 25
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+      key_text_offset_y: 2
+    - click: Page_Down
+      width: 15
+      label: 下页
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: Page_Up
+      label_symbol: 上頁
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: SwitchLayout
+      width: 15
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      long_click: More
+      label_symbol: 方案
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: English
+      width: 23.333333333333332
+      key_text_size: 14
+    - click: Space
+      width: 23.333333333333332
+      swipe_left: Left
+      swipe_right: Right
+      long_click: Digit0
+      label_symbol: '0'
+      key_symbol_offset_x: 29
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: Emoji
+      width: 23.333333333333332
+      key_text_size: 14
+    - click: Return
+      width: 15
+      key_text_size: 12
+      key_back_color: off_key_back_color
+      key_text_color: hilited_text_color
+  shittori_t9:
+    import_preset: default
+  rime_ice:
+    name: Shittori 全拼
+    author: lazypoems
+    ascii_mode: 0
+    reset_ascii_mode: true
+    ascii_keyboard: english
+    width: 10
+    height: 56
+    lock: true
+    keys:
+    - click: q
+      width: 10
+      long_click: Digit1
+      label_symbol: '1'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: w
+      width: 10
+      long_click: Digit2
+      label_symbol: '2'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: e
+      width: 10
+      long_click: Digit3
+      label_symbol: '3'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: r
+      width: 10
+      long_click: Digit4
+      label_symbol: '4'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: t
+      width: 10
+      long_click: Digit5
+      label_symbol: '5'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: y
+      width: 10
+      long_click: Digit6
+      label_symbol: '6'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: u
+      width: 10
+      long_click: Digit7
+      label_symbol: '7'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: i
+      width: 10
+      long_click: Digit8
+      label_symbol: '8'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: o
+      width: 10
+      long_click: Digit9
+      label_symbol: '9'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: p
+      width: 10
+      long_click: Digit0
+      label_symbol: '0'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: ''
+      width: 5
+    - click: a
+      width: 10
+    - click: s
+      width: 10
+    - click: d
+      width: 10
+    - click: f
+      width: 10
+    - click: g
+      width: 10
+    - click: h
+      width: 10
+    - click: j
+      width: 10
+    - click: k
+      width: 10
+    - click: l
+      width: 10
+    - click: ''
+      width: 5
+    - click: Shift_L
+      width: 15
+      label: ⇧
+    - click: z
+      width: 10
+    - click: x
+      width: 10
+    - click: c
+      width: 10
+    - click: v
+      width: 10
+    - click: b
+      width: 10
+    - click: n
+      width: 10
+    - click: m
+      width: 10
+    - click: BackSpace
+      width: 15
+    - click: Numbers
+      width: 15
+      key_text_size: 12
+    - click: SwitchT9
+      width: 15
+      long_click: More
+      key_text_size: 12
+      label_symbol: 方案
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: ','
+      width: 10
+    - click: Space
+      width: 30
+      swipe_left: Left
+      swipe_right: Right
+    - click: .
+      width: 10
+    - click: Return
+      width: 20
+      key_text_size: 12
+  english:
+    name: English
+    author: lazypoems
+    ascii_mode: 1
+    reset_ascii_mode: true
+    ascii_keyboard: english
+    width: 10
+    height: 56
+    lock: false
+    keys:
+    - click: q
+      width: 10
+      long_click: Digit1
+      label_symbol: '1'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: w
+      width: 10
+      long_click: Digit2
+      label_symbol: '2'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: e
+      width: 10
+      long_click: Digit3
+      label_symbol: '3'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: r
+      width: 10
+      long_click: Digit4
+      label_symbol: '4'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: t
+      width: 10
+      long_click: Digit5
+      label_symbol: '5'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: y
+      width: 10
+      long_click: Digit6
+      label_symbol: '6'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: u
+      width: 10
+      long_click: Digit7
+      label_symbol: '7'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: i
+      width: 10
+      long_click: Digit8
+      label_symbol: '8'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: o
+      width: 10
+      long_click: Digit9
+      label_symbol: '9'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: p
+      width: 10
+      long_click: Digit0
+      label_symbol: '0'
+      key_symbol_offset_x: 5
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: ''
+      width: 5
+    - click: a
+      width: 10
+    - click: s
+      width: 10
+    - click: d
+      width: 10
+    - click: f
+      width: 10
+    - click: g
+      width: 10
+    - click: h
+      width: 10
+    - click: j
+      width: 10
+    - click: k
+      width: 10
+    - click: l
+      width: 10
+    - click: ''
+      width: 5
+    - click: Shift_L
+      width: 15
+      label: ⇧
+    - click: z
+      width: 10
+    - click: x
+      width: 10
+    - click: c
+      width: 10
+    - click: v
+      width: 10
+    - click: b
+      width: 10
+    - click: n
+      width: 10
+    - click: m
+      width: 10
+    - click: BackSpace
+      width: 15
+    - click: Numbers
+      width: 15
+      key_text_size: 12
+    - click: Chinese
+      width: 15
+      long_click: More
+      key_text_size: 12
+      label_symbol: 方案
+      key_symbol_offset_x: 10
+      key_symbol_offset_y: 1
+      symbol_text_size: 8
+    - click: ','
+      width: 10
+    - click: Space
+      width: 30
+      swipe_left: Left
+      swipe_right: Right
+    - click: .
+      width: 10
+    - click: Return
+      width: 20
+      key_text_size: 12
+  number:
+    name: 数字
+    author: lazypoems
+    ascii_mode: 1
+    reset_ascii_mode: true
+    ascii_keyboard: english
+    width: 10
+    height: 56
+    lock: false
+    keys:
+    - click: '1'
+      width: 25
+    - click: '2'
+      width: 25
+    - click: '3'
+      width: 25
+    - click: BackSpace
+      width: 25
+      key_text_size: 14
+    - click: '4'
+      width: 25
+    - click: '5'
+      width: 25
+    - click: '6'
+      width: 25
+    - click: Symbols
+      width: 25
+      key_text_size: 14
+    - click: '7'
+      width: 25
+    - click: '8'
+      width: 25
+    - click: '9'
+      width: 25
+    - click: Chinese
+      width: 25
+      key_text_size: 14
+    - click: .
+      width: 25
+    - click: '0'
+      width: 25
+    - click: Space
+      width: 25
+    - click: Return
+      width: 25
+      key_text_size: 14
+  symbols:
+    name: 符号
+    author: lazypoems
+    ascii_mode: 1
+    reset_ascii_mode: true
+    ascii_keyboard: english
+    width: 10
+    height: 56
+    lock: false
+    keys:
+    - click: Punc0
+      width: 10
+    - click: Punc1
+      width: 10
+    - click: Punc2
+      width: 10
+    - click: Punc3
+      width: 10
+    - click: Punc4
+      width: 10
+    - click: Punc5
+      width: 10
+    - click: Punc6
+      width: 10
+    - click: Punc7
+      width: 10
+    - click: Punc8
+      width: 10
+    - click: Punc9
+      width: 10
+    - click: Punc10
+      width: 10
+    - click: Punc11
+      width: 10
+    - click: Punc12
+      width: 10
+    - click: Punc13
+      width: 10
+    - click: Punc14
+      width: 10
+    - click: Punc15
+      width: 10
+    - click: Punc16
+      width: 10
+    - click: Punc17
+      width: 10
+    - click: Punc18
+      width: 10
+    - click: Punc19
+      width: 10
+    - click: Chinese
+      width: 20
+    - click: Numbers
+      width: 20
+    - click: Emoji
+      width: 20
+    - click: BackSpace
+      width: 20
+    - click: Return
+      width: 20
+  editor:
+    name: 光标与编辑
+    author: lazypoems
+    ascii_mode: 0
+    reset_ascii_mode: false
+    width: 25
+    height: 56
+    lock: false
+    keys:
+    - click: select_all
+      width: 25
+      key_text_size: 14
+    - click: cut
+      width: 25
+      key_text_size: 14
+    - click: copy
+      width: 25
+      key_text_size: 14
+    - click: paste
+      width: 25
+      key_text_size: 14
+    - click: Home
+      width: 25
+      key_text_size: 14
+    - click: Up
+      width: 25
+      key_text_size: 14
+    - click: End
+      width: 25
+      key_text_size: 14
+    - click: undo
+      width: 25
+      key_text_size: 14
+    - click: Left
+      width: 25
+      key_text_size: 14
+    - click: Down
+      width: 25
+      key_text_size: 14
+    - click: Right
+      width: 25
+      key_text_size: 14
+    - click: redo
+      width: 25
+      key_text_size: 14
+    - click: Chinese
+      width: 25
+      key_text_size: 14
+    - click: SelectLeft
+      width: 25
+      key_text_size: 14
+    - click: SelectRight
+      width: 25
+      key_text_size: 14
+    - click: BackSpace
+      width: 25
+      key_text_size: 14
+tool_bar:
+  button_spacing: 0
+  button_font: []
+  primary_button:
+    action: Clipboard
+    size:
+    - 52
+    - 46
+    foreground:
+      style: 剪贴板
+      font_size: 12
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  buttons:
+  - action: Hide
+    size:
+    - 36
+    - 46
+    foreground:
+      style: 收起
+      font_size: 12
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  - action: Tools
+    size:
+    - 40
+    - 46
+    foreground:
+      style: 设置
+      font_size: 13
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  - action: Editor
+    size:
+    - 40
+    - 46
+    foreground:
+      style: 编辑
+      font_size: 13
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  - action: paste
+    size:
+    - 40
+    - 46
+    foreground:
+      style: 粘贴
+      font_size: 13
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  - action: Right
+    size:
+    - 40
+    - 46
+    foreground:
+      style: →
+      font_size: 20
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color
+  - action: Left
+    size:
+    - 40
+    - 46
+    foreground:
+      style: ←
+      font_size: 20
+      padding: 2
+    background:
+      corner_radius: 9
+      highlight: hilited_candidate_back_color

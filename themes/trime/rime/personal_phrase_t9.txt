@@ -1,0 +1,2 @@
+# Optional personal phrases. Keep this file private after adding your entries.
+# Format: phrase<TAB>code<TAB>weight

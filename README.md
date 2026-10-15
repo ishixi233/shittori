@@ -1,6 +1,6 @@
 # Shittori しっとり · 笔记与输入法主题
 
-为自己设计的一套主题，用于 Typora、Obsidian 和 macOS 鼠须管（Squirrel）。笔记主题以中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔；输入法皮肤延续相同的暖纸白、松叶绿与深色蓝灰配色。笔记主题创建于 2026-10-11 至 10-12，鼠须管皮肤于 2026-10-13 加入。
+为自己设计的一套主题，用于 Typora、Obsidian、macOS 鼠须管（Squirrel）和 Android 同文（Trime）。笔记主题以中文为主，兼顾英文和少量日文，面向金融、技术、机器学习笔记和文学哲学随笔；输入法皮肤延续相同的暖纸白、松叶绿与深色蓝灰配色。笔记主题创建于 2026-10-11 至 10-12，鼠须管皮肤于 2026-10-13 加入。
 
 名字取自日语「しっとり」：润泽、沉静、不张扬。罗马字里双写的 t 是促音，不能省。
 
@@ -16,6 +16,7 @@
 - [设计过程与决策](<设计过程与决策.md>)：每一步试了什么、留下什么、撤回什么和原因，以及尺寸体系、字体分工、配色的完整规格。
 - [样式测试](<样式测试.md>)：把主题处理过的元素各用一遍的测试文档，换主题或改变量后打开它检查。
 - [鼠须管皮肤](<themes/squirrel/README.md>)：松叶 / 蓝夜两套配色、安装方法、紧凑候选框与调整参数。
+- [同文九宫格](<themes/trime/README.md>)：Android 拼音九宫格、松叶 / 蓝夜配色、一级剪贴板与编辑工具栏。
 - 预览图在 [figures](<figures/>)，各软件的主题文件在 [themes](<themes/>)。
 
 ## 预览
@@ -38,13 +39,14 @@ Obsidian 阅读模式（浅色、深色）与实时预览：
 
 ## 成品在哪里
 
-正在使用的文件在各软件自己的目录里。本项目保留 Typora、Obsidian 的主题文件，以及 2026-10-13 新增的鼠须管皮肤。
+正在使用的文件在各软件自己的目录里。本项目保留 Typora、Obsidian、鼠须管和同文的成品主题与使用说明。
 
 | 软件 | 正在使用的位置 | 本项目里的文件 |
 |---|---|---|
 | Typora | `~/Library/Application Support/abnerworks.Typora/themes/` 下的 `shittori.css`、`shittori-night.css`、`shittori/dark.css` | [themes/typora](<themes/typora/>) |
 | Obsidian | 库目录里 `.obsidian/themes/Shittori/` 下的 `theme.css`、`manifest.json` | [themes/obsidian](<themes/obsidian/>) |
 | 鼠须管（macOS） | `~/Library/Rime/squirrel.custom.yaml` | [themes/squirrel](<themes/squirrel/>) |
+| 同文（Android） | 同文选定的 Rime 外部同步目录 | [themes/trime](<themes/trime/>) |
 
 修改正在使用的主题后，同步更新本项目对应的软件子目录。
 
@@ -67,6 +69,10 @@ mkdir -p <你的库>/.obsidian/themes/Shittori && cp themes/obsidian/* <你的�
 ### 鼠须管
 
 [安装说明与完整配置](<themes/squirrel/README.md>)。默认横向候选、16 pt 字号、紧凑留白，外框 / 选中项圆角为 12 / 8；浅色「松叶」与深色「蓝夜」随 macOS 外观切换。已有配置时只合并外观补丁，再重新部署。
+
+### 同文九宫格
+
+[安装说明与配置](<themes/trime/README.md>) · [下载主题包](https://github.com/ishixi233/shittori/releases/tag/trime-2.0.0)。适配 Trime 3.3.12，主键区 224dp、候选文字 17sp，数字与长按提示位于右上角，剪贴板和编辑直接从顶部工具栏进入。浅深配色可随系统切换，使用 Android 默认字体。
 
 ## 依赖的字体
 

@@ -1,1 +1,10 @@
 .DS_Store
+
+# Local personal input-method data and installers
+_private/
+**/*.userdb/
+**/build/
+**/installation.yaml
+**/user.yaml
+*-PRIVATE.zip
+/themes/trime/*.zip
