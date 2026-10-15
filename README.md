@@ -120,6 +120,8 @@ Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirre
 
 ## 已知问题与边界
 
+- **实测范围有限。** 已检查 macOS 上的示例正文与浅深色阅读效果；公式、Mermaid、所有编辑状态和第三方插件界面尚未逐项验证。Windows、Linux 和移动端也未实测。
+
 - **英文弯引号是全角的。** 为了让中文“引号”正常，弯引号交给了宋体，英文段落里的 “quoted” 两侧会有较宽的空隙；英文撇号不受影响。英文段落用直引号可以避开。同一个字符只能有一种宽度，这是有意的取舍。
 - **两端对齐遇到行内代码会拉开字距**，所以默认改成了左对齐。
 - **日文汉字是简体字形。** 假名没问题；要地道的明朝体字形需给那段加 `<span lang="ja">`。
@@ -127,6 +129,13 @@ Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirre
 - **图片和公式会打破 8px 的纵向网格**，之后的内容不再落在格子上。
 - **Typora 的提示块只认五种**（NOTE、TIP、IMPORTANT、WARNING、CAUTION），不支持 Obsidian 的自定义标题、折叠和其他类型。两边混用同一篇笔记时要留意。
 - **额外 CSS 片段会改变主题效果。** 例如首行缩进片段会给每段加两字缩进；主题本身使用段间留白、不缩进。
+
+## 社区入口
+
+- [Typora 官方主题站投稿](https://github.com/typora/theme.typora.io/pull/578)：等待维护者审核。
+- [Rime 官方社区展示](https://github.com/orgs/rime/discussions/2222)：鼠须管皮肤。
+- [同文官方社区展示](https://github.com/osfans/trime/discussions/2166)：Android 九宫格主题。
+- [Obsidian 独立仓库](https://github.com/ishixi233/shittori-obsidian)：可下载手动安装，官方目录尚未收录。
 
 ## 相关主题与配色参考
 
