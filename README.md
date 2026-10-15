@@ -45,7 +45,7 @@ Typora 和 Obsidian 的浅深色阅读图来自 macOS 上的实际应用，已�
 | 平台 | 下载与说明 |
 |---|---|
 | Typora | [主题包](https://github.com/ishixi233/shittori/releases/tag/typora-1.0.0) · [安装说明](themes/typora/README.md) |
-| Obsidian | [独立主题仓库](https://github.com/ishixi233/shittori-obsidian) · [安装说明](themes/obsidian/README.md) |
+| Obsidian · Matsuba | [独立主题仓库](https://github.com/ishixi233/shittori-obsidian) · [安装说明](themes/obsidian/README.md) |
 | 鼠须管 | [皮肤包](https://github.com/ishixi233/shittori/releases/tag/squirrel-1.0.0) · [安装说明](themes/squirrel/README.md) |
 | 同文 | [主题包](https://github.com/ishixi233/shittori/releases/tag/trime-2.0.0) · [安装说明](themes/trime/README.md) |
 
@@ -55,6 +55,8 @@ Typora 和 Obsidian 的浅深色阅读图来自 macOS 上的实际应用，已�
 | Obsidian | 库目录里 `.obsidian/themes/Shittori/` 下的 `theme.css`、`manifest.json` | [themes/obsidian](<themes/obsidian/>) |
 | 鼠须管（macOS） | `~/Library/Rime/squirrel.custom.yaml` | [themes/squirrel](<themes/squirrel/>) |
 | 同文（Android） | 同文选定的 Rime 外部同步目录 | [themes/trime](<themes/trime/>) |
+
+Obsidian 发行版显示名为 **Matsuba（松叶）**，属于 Shittori 系列；仓库地址和 Style Settings 中的 Shittori 分组名保持不变。已有的本机 Shittori 安装不受项目文件更新影响。
 
 修改正在使用的主题后，同步更新本项目对应的软件子目录。
 
@@ -69,10 +71,10 @@ cp -R themes/typora/ ~/Library/Application\ Support/abnerworks.Typora/themes/
 Obsidian：
 
 ```bash
-mkdir -p <你的库>/.obsidian/themes/Shittori && cp themes/obsidian/* <你的库>/.obsidian/themes/Shittori/
+mkdir -p <你的库>/.obsidian/themes/Matsuba && cp themes/obsidian/theme.css themes/obsidian/manifest.json <你的库>/.obsidian/themes/Matsuba/
 ```
 
-恢复后在 Typora 的「主题」菜单里选 Shittori（深色选 Shittori Night 或同样选 Shittori）；在 Obsidian 的「设置 → 外观 → 主题」里选 Shittori，并把字体大小设为 18。
+恢复后在 Typora 的「主题」菜单里选 Shittori（深色选 Shittori Night 或同样选 Shittori）；在 Obsidian 的「设置 → 外观 → 主题」里选 Matsuba，并把字体大小设为 18。
 
 ### 鼠须管
 
@@ -135,7 +137,7 @@ Typora 和 Obsidian 的配色集中在 `--s-*` 变量里。鼠须管在 `squirre
 - [Typora 官方主题站投稿](https://github.com/typora/theme.typora.io/pull/578)：等待维护者审核。
 - [Rime 官方社区展示](https://github.com/orgs/rime/discussions/2222)：鼠须管皮肤。
 - [同文官方社区展示](https://github.com/osfans/trime/discussions/2166)：Android 九宫格主题。
-- [Obsidian 独立仓库](https://github.com/ishixi233/shittori-obsidian)：可下载手动安装，官方目录尚未收录。
+- [Obsidian 官方主题页 · Matsuba](https://community.obsidian.md/themes/matsuba)：条目已公开，审核进行中；也可从[独立仓库](https://github.com/ishixi233/shittori-obsidian)下载手动安装。
 
 ## 相关主题与配色参考
 
