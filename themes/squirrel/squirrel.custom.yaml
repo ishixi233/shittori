@@ -13,7 +13,7 @@ patch:
   style/color_scheme: shittori_matsuba
   style/translucency: false
   style/candidate_list_layout: linear
-  style/hilited_corner_radius: 8
+  style/hilited_corner_radius: 9
   style/corner_radius: 12
   style/font_point: 16
   style/border_width: -2

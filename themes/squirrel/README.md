@@ -4,7 +4,7 @@
 
 把 Shittori 的暖纸白与深色蓝灰带到 macOS 鼠须管（Squirrel）。浅色为「松叶」，深色为「蓝夜」，跟随系统外观切换。配色取自 [Typora 浅色主题](../typora/shittori.css)与[深色主题](../typora/shittori/dark.css)。
 
-横向候选，候选词和注释使用 Helvetica（中文由系统回退至苹方），编号使用 JetBrains Mono，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、8，实色背景，`shadow_size` 设置为 `0`。
+横向候选，候选词和注释使用 Helvetica（中文由系统回退至苹方），编号使用 JetBrains Mono，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、9，实色背景，`shadow_size` 设置为 `0`。
 
 ## 实际效果
 
@@ -14,7 +14,7 @@
 
 ![鼠须管蓝夜实机截图](../../figures/squirrel-ai-actual.png)
 
-两图均为 macOS 上的鼠须管实机截图。浅色图裁去了编辑器工具栏和多余空白，深色图保留原图。截图使用本机日常配置：外框与选中项圆角为 16 / 9，窗口阴影可见；下载包默认圆角为 12 / 8，并设置 `shadow_size: 0`，外观会略有区别。候选内容由输入方案与个人词频决定。
+浅色「松叶」与深色「蓝夜」均为 macOS 鼠须管实机截图，外框与选中项圆角统一为 12 / 9。两图画布均为 678 × 160 像素，仅补齐边缘留白，未缩放候选框。候选内容由输入方案与个人词频决定。
 
 ## 文件
 
@@ -63,7 +63,7 @@ Squirrel Panel 2.0.5 的「用户自定义配色」有独立注册表，不会�
 | `style/border_width` | `-2` | 横向留白；负值收紧，并非 CSS 描边粗细 |
 | `style/border_height` | `-2` | 纵向留白；负值收紧 |
 | `style/corner_radius` | `12` | 外框圆角 |
-| `style/hilited_corner_radius` | `8` | 选中项圆角 |
+| `style/hilited_corner_radius` | `9` | 选中项圆角 |
 
 ## 配色
 
