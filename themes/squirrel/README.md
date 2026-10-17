@@ -4,7 +4,17 @@
 
 把 Shittori 的暖纸白与深色蓝灰带到 macOS 鼠须管（Squirrel）。浅色为「松叶」，深色为「蓝夜」，跟随系统外观切换。配色取自 [Typora 浅色主题](../typora/shittori.css)与[深色主题](../typora/shittori/dark.css)。
 
-横向候选，候选词和注释使用 Helvetica（中文由系统回退至苹方），编号使用 JetBrains Mono，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、8，实色背景、无阴影。
+横向候选，候选词和注释使用 Helvetica（中文由系统回退至苹方），编号使用 JetBrains Mono，候选词 16 pt、序号及注释 12 pt。横纵留白收紧，外框与选中项圆角分别为 12、8，实色背景，`shadow_size` 设置为 `0`。
+
+## 实际效果
+
+鼠须管浅色「松叶」与深色「蓝夜」：
+
+![鼠须管松叶实机截图](../../figures/squirrel-matsuba-actual.png)
+
+![鼠须管蓝夜实机截图](../../figures/squirrel-ai-actual.png)
+
+两图均为 macOS 上的鼠须管实机截图。浅色图裁去了编辑器工具栏和多余空白，深色图保留原图。截图使用本机日常配置：外框与选中项圆角为 16 / 9，窗口阴影可见；下载包默认圆角为 12 / 8，并设置 `shadow_size: 0`，外观会略有区别。候选内容由输入方案与个人词频决定。
 
 ## 文件
 
